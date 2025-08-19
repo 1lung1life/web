@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="cs" class="transition-colors duration-300">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinární ordinace Orea</title>
+    <link rel="icon" type="image/png" href="oreaicon_idk.png">
+
+    <!-- SEO / Meta -->
+    <meta name="description" content="Veterinární ordinace Orea v Miroslavi – ordinační hodiny, služby, ceník a kontakt. Péče o vaše mazlíčky s láskou.">
+    <meta name="keywords" content="veterinář, ordinace, Miroslav, mazlíčci, očkování, kastrace, ordinační hodiny">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Veterinární ordinace Orea">
+    <meta property="og:description" content="Péče o vaše mazlíčky v Miroslavi. Ordinační doba, ceník a kontakt.">
+    <meta property="og:image" content="oreaicon_idk.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', system-ui, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #1cb3a4 !important;
+        }
+        
+        .btn-primary {
+            background-color: #77bf3c;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5fa330;
+            transform: translateY(-2px);
+        }
+        
+        .bg-primary {
+            background-color: #063b4a;
+        }
+        
+        .bg-secondary {
+            background-color: #1cb3a4;
+        }
+        
+        .bg-accent {
+            background-color: #77bf3c;
+        }
+        
+        .text-primary {
+            color: #063b4a;
+        }
+        
+        .text-secondary {
+            color: #1cb3a4;
+        }
+        
+        .text-accent {
+            color: #77bf3c;
+        }
+        
+        .border-accent {
+            border-color: #77bf3c;
+        }
+        
+        .hero-pattern {
+            background-image: radial-gradient(#1cb3a433 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Přechod obrázku */
+        #hero-image {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Tmavý režim */
+        body.dark {
+            background-color: #0f1a1e;
+            color: #e5e7eb;
+        }
+        body.dark .bg-primary {
+            background-color: #041f27;
+        }
+        body.dark .bg-secondary {
+            background-color: #158b7f;
+        }
+        body.dark .bg-accent {
+            background-color: #5a912d;
+        }
+        body.dark .text-primary {
+            color: #e5e7eb;
+        }
+        body.dark .text-secondary {
+            color: #2dd4bf;
+        }
+        body.dark .text-accent {
+            color: #a3e635;
+        }
+        body.dark .bg-white {
+            background-color: #1f2937 !important;
+            color: #e5e7eb;
+        }
+        body.dark .bg-gray-50 {
+            background-color: #111827 !important;
+        }
+        body.dark .text-gray-600 {
+            color: #d1d5db;
+        }
+        body.dark .text-gray-300 {
+            color: #9ca3af;
+        }
+        body.dark .text-gray-500 {
+            color: #9ca3af;
+        }
+        body.dark .hover\:bg-gray-50:hover {
+            background-color: #1f2937 !important;
+        }
+        body.dark .border-gray-700 {
+            border-color: #374151;
+        }
+        body.dark .divide-gray-200 > * {
+            border-color: #374151;
+        }
+        body.dark .btn-primary {
+            background-color: #5a912d;
+        }
+        body.dark .btn-primary:hover {
+            background-color: #4a7b25;
+        }
+        body.dark .bg-blue-50 {
+            background-color: #1e3a8a !important;
+        }
+        body.dark .border-blue-400 {
+            border-color: #3b82f6;
+        }
+        body.dark .text-blue-800 {
+            color: #93c5fd;
+        }
+        body.dark .hero-pattern {
+            background-image: radial-gradient(#2dd4bf33 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-paw text-accent text-2xl" aria-hidden="true"></i>
+                <h1 class="text-xl font-semibold">Veterinární ordinace <span class="text-accent">Orea</span></h1>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#sluzby" class="nav-link text-white hover:text-accent transition">Služby</a>
+                    <a href="#cenik" class="nav-link text-white hover:text-accent transition">Ceník</a>
+                    <a href="#kontakt" class="nav-link text-white hover:text-accent transition">Kontakt</a>
+                </nav>
+                
+                <!-- Dark mode toggle -->
+                <button id="dark-mode-toggle" aria-label="Přepnout tmavý režim" class="text-white hover:text-accent transition">
+                    <i class="fas fa-moon text-xl"></i>
+                </button>
+
+                <button aria-label="Otevřít menu" aria-expanded="false" class="md:hidden text-white focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden bg-primary text-white py-4 px-4" id="mobile-menu">
+        <div class="flex flex-col space-y-3">
+            <a href="#sluzby" class="nav-link text-white hover:text-accent transition">Služby</a>
+            <a href="#cenik" class="nav-link text-white hover:text-accent transition">Ceník</a>
+            <a href="#kontakt" class="nav-link text-white hover:text-accent transition">Kontakt</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern">
+        <div class="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">Péče o vaše <span class="text-accent">mazlíčky</span> s láskou</h2>
+                <p class="text-gray-600 mb-6 text-lg">Profesionální veterinární služby s individuálním přístupem ke každému pacientovi.</p>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img id="hero-image" src="vetorea_final_idk.png" alt="Logo veterinární ordinace Orea" class="rounded-lg shadow-xl max-w-md w-full h-auto" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="sluzby" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Naše služby</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-syringe" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Preventivní péče</h3>
+                    <p class="text-gray-600">Pravidelné prohlídky, očkování a odčervení pro udržení zdraví vašeho mazlíčka.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-stethoscope" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Léčebná péče</h3>
+                    <p class="text-gray-600">Diagnostika a léčba onemocnění s využitím moderních veterinárních metod.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-bone" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Chirurgické zákroky</h3>
+                    <p class="text-gray-600">Šetrné operační řešení včetně kastrací a dalších chirurgických výkonů.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-teeth" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Dentální péče</h3>
+                    <p class="text-gray-600">Komplexní stomatologická péče včetně dentální hygieny a extrakcí zubů.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Kardiologie</h3>
+                    <p class="text-gray-600">Specializované vyšetření srdce a oběhového systému vašeho zvířete.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-ambulance" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Nouzová péče</h3>
+                    <p class="text-gray-600">Okamžitá pomoc v případě úrazu nebo náhlého zhoršení zdravotního stavu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price List Section -->
+    <section id="cenik" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Ceník služeb</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">Služba</th>
+                            <th class="py-3 px-4 text-right">Cena</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="vstupni-vysetreni">
+                            <td class="py-3 px-4">Vstupní vyšetření</td>
+                            <td class="py-3 px-4 text-right">500 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="ockovani-zakladni">
+                            <td class="py-3 px-4">Očkování základní</td>
+                            <td class="py-3 px-4 text-right">600 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="odcerveni">
+                            <td class="py-3 px-4">Odčervení</td>
+                            <td class="py-3 px-4 text-right">300 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="kastrace-kocoura">
+                            <td class="py-3 px-4">Kastrace kocoura</td>
+                            <td class="py-3 px-4 text-right">1 500 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="kastrace-feny">
+                            <td class="py-3 px-4">Kastrace feny</td>
+                            <td class="py-3 px-4 text-right">3 000 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="dentalni-hygiena">
+                            <td class="py-3 px-4">Dentální hygiena</td>
+                            <td class="py-3 px-4 text-right">1 200 Kč</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row" data-service="ultrazvuk">
+                            <td class="py-3 px-4">Ultrazvukové vyšetření</td>
+                            <td class="py-3 px-4 text-right">900 Kč</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Service Details Section -->
+            <div id="service-details" class="mt-8 hidden">
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-accent">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 id="detail-title" class="text-xl font-semibold text-primary"></h3>
+                        <button id="close-details" class="text-gray-500 hover:text-gray-700" aria-label="Zavřít detail služby">
+                            <i class="fas fa-times text-xl" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div id="detail-content" class="text-gray-600">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <p class="text-gray-600">* Ceny jsou orientační. Přesnou cenu určí lékař po vyšetření.</p>
+                <p class="text-gray-600 mt-2"><strong>Lze platit QR kódem</strong></p>
+                <p class="text-gray-600 mt-3">💡 Klikněte na službu pro více informací o ceně</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Kontaktujte nás</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col gap-8">
+                <div class="w-full">
+                    <div id="contact-card" class="bg-white p-6 rounded-lg shadow-sm" style="background-image: url('vetoreaphone.png'); background-position: right center; background-repeat: no-repeat; background-size: contain; transition: background-image 0.3s ease-in-out;">
+                        <h3 class="text-xl font-semibold text-primary mb-4">Kontaktní údaje</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="text-secondary text-xl mr-3 mt-1">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-primary">Adresa</h4>
+                                    <p class="text-gray-600">Brněnská 104/27,<br>671 72 Miroslav</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-secondary text-xl mr-3 mt-1">
+                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-primary">Telefon</h4>
+                                    <p class="text-gray-600"><a href="tel:601380388" class="text-secondary hover:underline">601 380 388</a></p>
+
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-secondary text-xl mr-3 mt-1">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-primary">Email</h4>
+                                    <p class="text-gray-600"><a href="mailto:veterina.kolarova@seznam.cz" class="text-secondary hover:underline">veterina.kolarova@seznam.cz</a></p>
+
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-secondary text-xl mr-3 mt-1">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-primary">Ordinační doba</h4>
+                                    <p class="text-gray-600">
+                                        Pondělí: 11:00 - 15:00<br>
+                                        Čtvrtek: 8:30 - 11:30<br>
+                                        <span class="block mt-2">Ostatní dny pouze po objednání po telefonu.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold text-primary mb-4">Kde nás najít</h2>
+            <div class="w-20 h-1 bg-accent mx-auto"></div>
+        </div>
+    </div>
+    <div class="h-96 w-full">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.964234833635!2d16.31296431568319!3d48.9463702023486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712f7e2e2e2e3%3A0x6e2e2e2e2e2e2e2e!2sBrn%C4%9Bnsk%C3%A1%20104%2F27%2C%20671%2072%20Miroslav!5e0!3m2!1scs!2scz!4v1717171717171!5m2!1scs!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-paw text-accent text-xl" aria-hidden="true"></i>
+                        <h2 class="text-lg font-semibold">Veterinární ordinace <span class="text-accent">Orea</span></h2>
+                    </div>
+                    <p class="mt-1 text-gray-300 text-sm">Péče o vaše mazlíčky s láskou a odborností</p>
+                </div>
+                
+                <div class="flex items-center space-x-2 text-sm">
+                    <span class="text-gray-300">Pro aktuální info:</span>
+                    <a href="https://www.facebook.com/p/Veterin%C3%A1rn%C3%AD-ordinace-Orea-100068049579382/" target="_blank" rel="noopener" class="text-gray-300 hover:text-accent transition" aria-label="Facebook stránka">
+                        <i class="fab fa-facebook-f text-lg" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-6 pt-4 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+                <p>&copy; 2025 Veterinární ordinace Orea. Všechna práva vyhrazena.</p>
+                <p class="mt-2 md:mt-0">IČO: 01904523</p>
+            </div>
+            
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Definice obrázků pro světlý a tmavý režim
+        const images = {
+            hero: {
+                light: 'vetorea_final_idk.png',
+                dark: 'vetorea_final_dark.png'  // Zde změňte název na váš tmavý obrázek
+            },
+            contact: {
+                light: 'vetoreaphone.png',
+                dark: 'vetoreaphone_dark.png'   // Zde změňte název na váš tmavý kontaktní obrázek
+            }
+        };
+
+        // Funkce pro změnu obrázku
+        function updateHeroImage(isDark) {
+            const heroImage = document.getElementById('hero-image');
+            const imageSrc = isDark ? images.hero.dark : images.hero.light;
+            
+            // Plynulý přechod
+            heroImage.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                heroImage.src = imageSrc;
+                heroImage.style.opacity = '1';
+            }, 150);
+        }
+
+        // Funkce pro změnu pozadí kontaktní karty
+        function updateContactBackground(isDark) {
+            const contactCard = document.getElementById('contact-card');
+            const imageSrc = isDark ? images.contact.dark : images.contact.light;
+            
+            contactCard.style.backgroundImage = `url('${imageSrc}')`;
+        }
+
+        // Dark mode toggle
+        const toggleBtn = document.getElementById('dark-mode-toggle');
+        const darkModeIcon = toggleBtn.querySelector('i');
+        
+        toggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark');
+            
+            // Uložit preferenci
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            
+            // Změnit ikonu
+            darkModeIcon.className = isDark ? 'fas fa-sun text-xl' : 'fas fa-moon text-xl';
+            
+            // Změnit obrázky
+            updateHeroImage(isDark);
+            updateContactBackground(isDark);
+        });
+
+        // Načíst preferenci tmavého režimu při načtení stránky
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === 'enabled') {
+            document.body.classList.add('dark');
+            darkModeIcon.className = 'fas fa-sun text-xl';
+            updateHeroImage(true);
+            updateContactBackground(true);
+        }
+
+        // Service details data
+        const serviceDetails = {
+    'vstupni-vysetreni': {
+        title: 'Vstupní vyšetření',
+        basePrice: 500,
+        description: 'Kompletní vyšetření vašeho mazlíčka včetně anamnézy, fyzikálního vyšetření a základní diagnostiky.',
+        includes: [
+            'Anamnéza a rozhovor s majitelem',
+            'Fyzikální vyšetření',
+            'Základní diagnostika',
+            'Doporučení léčby'
+        ],
+        additionalCosts: [
+            'Laboratorní vyšetření: +400 Kč',
+            'Speciální anestezie: +500 Kč',
+            'Pooperační léky: +300 Kč',
+            'Ochranný límec: +150 Kč'
+        ],
+        note: 'Cena zahrnuje základní vyšetření. Další vyšetření a léky se účtují zvlášť.'
+    },
+    'ockovani-zakladni': {
+        title: 'Základní očkování',
+        basePrice: 600,
+        description: 'Pravidelné očkování pro prevenci infekčních onemocnění.',
+        includes: [
+            'Aplikace základní vakcíny',
+            'Kontrola zdravotního stavu'
+        ],
+        additionalCosts: [
+            'Speciální vakcíny: +300 Kč',
+            'Očkovací průkaz: +100 Kč'
+        ],
+        note: 'Cena se může lišit dle druhu vakcíny a velikosti zvířete.'
+    },
+    'odcerveni': {
+        title: 'Odčervení',
+        basePrice: 300,
+        description: 'Pravidelné odčervení pro prevenci parazitárních onemocnění.',
+        includes: [
+            'Tablety nebo pasta dle hmotnosti zvířete',
+            'Kontrola zdravotního stavu'
+        ],
+        additionalCosts: [
+            'Speciální přípravky proti vnějším parazitům: +200 Kč'
+        ],
+        note: 'Cena se může lišit dle velikosti a hmotnosti zvířete.'
+    },
+    'kastrace-kocoura': {
+        title: 'Kastrace kocoura',
+        basePrice: 1500,
+        description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování kocoura.',
+        includes: [
+            'Předoperační vyšetření',
+            'Anestezie',
+            'Chirurgický zákrok',
+            'Pooperační péče'
+        ],
+        additionalCosts: [
+            'Léky po zákroku: +300 Kč',
+            'Ochranný límec: +150 Kč'
+        ],
+        note: 'Cena zahrnuje základní výkon a anestezii.'
+    },
+    'kastrace-feny': {
+        title: 'Kastrace feny',
+        basePrice: 3000,
+        description: 'Komplexní chirurgický zákrok u fen, který předchází nechtěné březosti a snižuje riziko onemocnění.',
+        includes: [
+            'Předoperační vyšetření',
+            'Celková anestezie',
+            'Chirurgický zákrok',
+            'Hospitalizace po zákroku'
+        ],
+        additionalCosts: [
+            'Pooperační léky: +400 Kč',
+            'Ochranný límec: +150 Kč'
+        ],
+        note: 'Cena se může lišit podle velikosti a zdravotního stavu feny.'
+    },
+    'dentalni-hygiena': {
+        title: 'Dentální hygiena',
+        basePrice: 1200,
+        description: 'Komplexní dentální péče včetně odstranění zubního kamene.',
+        includes: [
+            'Vyšetření dutiny ústní',
+            'Odstranění zubního kamene',
+            'Leštění zubů',
+            'Fluoridace'
+        ],
+        additionalCosts: [
+            'Anestezie: +400 Kč',
+            'Extrakce zubů: +300 Kč/zub',
+            'Antibiotika: +200 Kč'
+        ],
+        note: 'Cena zahrnuje základní dentální hygienu. Anestezie a extrakce se účtují zvlášť.'
+    },
+    'ultrazvuk': {
+        title: 'Ultrazvukové vyšetření',
+        basePrice: 900,
+        description: 'Ultrazvukové vyšetření vnitřních orgánů.',
+        includes: [
+            'Vyšetření břicha',
+            'Vyšetření srdce (ECHO)',
+            'Vyšetření měkkých tkání',
+            'Písemný nález'
+        ],
+        additionalCosts: [
+            'Speciální vyšetření: +300 Kč',
+            'Biopsie: +500 Kč',
+            'Kontrolní vyšetření: +600 Kč'
+        ],
+        note: 'Cena zahrnuje základní ultrazvukové vyšetření. Speciální vyšetření se účtují zvlášť.'
+    }
+};
+
+
+        // Mobile menu toggle with ARIA update
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            mobileMenu.classList.toggle('hidden');
+            this.setAttribute('aria-expanded', (!expanded).toString());
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Service row click handlers
+        document.querySelectorAll('.service-row').forEach(row => {
+            row.addEventListener('click', function() {
+                const serviceId = this.getAttribute('data-service');
+                const service = serviceDetails[serviceId];
+                
+                if (service) {
+                    showServiceDetails(service);
+                }
+            });
+        });
+
+        // Close details button
+        document.getElementById('close-details').addEventListener('click', function() {
+            hideServiceDetails();
+        });
+
+        function showServiceDetails(service) {
+            const detailsSection = document.getElementById('service-details');
+            const titleElement = document.getElementById('detail-title');
+            const contentElement = document.getElementById('detail-content');
+            
+            titleElement.textContent = service.title;
+            
+            let content = `
+                <div class="mb-4">
+                    <p class="text-lg mb-3">${service.description}</p>
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold text-primary mb-2">Základní cena: <span class="text-accent text-xl">${service.basePrice} Kč</span></h4>
+                    </div>
+                </div>
+            `;
+            
+            if (service.includes) {
+                content += `
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-primary mb-2">Cena zahrnuje:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            ${service.includes.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            if (service.additionalCosts) {
+                content += `
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-primary mb-2">Další možné náklady:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            ${service.additionalCosts.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            if (service.note) {
+                content += `
+                    <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                        <p class="text-blue-800 text-sm"><i class="fas fa-info-circle mr-2" aria-hidden="true"></i>${service.note}</p>
+                    </div>
+                `;
+            }
+            
+            contentElement.innerHTML = content;
+            detailsSection.classList.remove('hidden');
+            
+            // Scroll to details
+            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideServiceDetails() {
+            document.getElementById('service-details').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
