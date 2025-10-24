@@ -250,6 +250,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Laboratorní diagnostika</h3>
                     <p class="text-gray-600">Analýza krve a dalších vzorků pro přesné určení zdravotního stavu vašeho zvířete.</p>
+                    <p class="text-gray-600"><strong>CRP: Na počkání</strong></p>
                 </div>
                 
                 <!-- Service 6 -->
@@ -283,31 +284,36 @@
                     <tbody class="divide-y divide-gray-200">
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="vstupni-vysetreni">
                             <td class="py-3 px-4">Klinické vyšetření</td>
-                            <td class="py-3 px-4 text-right">500 Kč</td>
+                            <td class="py-3 px-4 text-right">350 Kč</td>
                         </tr>
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ockovani-zakladni">
                             <td class="py-3 px-4">Očkování</td>
-                            <td class="py-3 px-4 text-right">600 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="odcerveni">
-                            <td class="py-3 px-4">Odčervení</td>
-                            <td class="py-3 px-4 text-right">300 Kč</td>
+                            <td class="py-3 px-4 text-right">620 Kč</td>
                         </tr>
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kocoura">
                             <td class="py-3 px-4">Kastrace kocoura</td>
-                            <td class="py-3 px-4 text-right">1 500 Kč</td>
+                            <td class="py-3 px-4 text-right">1 000 Kč</td>
                         </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kočky">
+                            <td class="py-3 px-4">Kastrace kočky</td>
+                            <td class="py-3 px-4 text-right">1 600 Kč</td>
+                            </tr>
+                        </tr>
+                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-pes">
+                            <td class="py-3 px-4">Kastrace psa</td>
+                            <td class="py-3 px-4 text-right">1 800 Kč</td>
+                            </tr>
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-feny">
                             <td class="py-3 px-4">Kastrace feny</td>
-                            <td class="py-3 px-4 text-right">3 000 Kč</td>
+                            <td class="py-3 px-4 text-right">3 500 Kč</td>
                         </tr>
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="dentalni-hygiena">
                             <td class="py-3 px-4">Dentální hygiena</td>
-                            <td class="py-3 px-4 text-right">1 200 Kč</td>
+                            <td class="py-3 px-4 text-right">1 700 Kč</td>
                         </tr>
                         <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ultrazvuk">
                             <td class="py-3 px-4">Ultrazvukové vyšetření</td>
-                            <td class="py-3 px-4 text-right">900 Kč</td>
+                            <td class="py-3 px-4 text-right">500 Kč</td>
                         </tr>
                     </tbody>
                 </table>
@@ -389,8 +395,11 @@
                                 <div>
                                     <h4 class="font-medium text-primary">Ordinační doba</h4>
                                     <p class="text-gray-600">
-                                        Pondělí: 11:00 - 15:00<br>
-                                        Čtvrtek: 8:30 - 11:30<br>
+                                        Pondělí: 11:00 - 14:00<br>
+                                        Úterý: 18:00 - 20:00<br>
+                                        Středa: Objednaní pacienti<br>
+                                        Čtvrtek: 8:30 - 11:30, 18:00 - 20:00<br>
+                                        Pátek: Objednaní pacienti<br>
                                         <span class="block mt-2">Ostatní dny pouze po objednání po telefonu.</span>
                                     </p>
                                 </div>
@@ -508,7 +517,7 @@
         const serviceDetails = {
     'vstupni-vysetreni': {
         title: 'Klinické vyšetření',
-        basePrice: 500,
+        basePrice: 350,
         description: 'Kompletní vyšetření vašeho mazlíčka včetně anamnézy, fyzikálního vyšetření a základní diagnostiky.',
         includes: [
             'Anamnéza a rozhovor s majitelem',
@@ -526,7 +535,7 @@
     },
     'ockovani-zakladni': {
         title: 'Základní očkování',
-        basePrice: 600,
+        basePrice: 620,
         description: 'Pravidelné očkování pro prevenci infekčních onemocnění.',
         includes: [
             'Aplikace základní vakcíny',
@@ -538,23 +547,42 @@
         ],
         note: 'Cena se může lišit dle druhu vakcíny a velikosti zvířete.'
     },
-    'odcerveni': {
-        title: 'Odčervení',
-        basePrice: 300,
-        description: 'Pravidelné odčervení pro prevenci parazitárních onemocnění.',
-        includes: [
-            'Tablety nebo pasta dle hmotnosti zvířete',
-            'Kontrola zdravotního stavu'
-        ],
-        additionalCosts: [
-            'Speciální přípravky proti vnějším parazitům: +200 Kč'
-        ],
-        note: 'Cena se může lišit dle velikosti a hmotnosti zvířete.'
-    },
     'kastrace-kocoura': {
         title: 'Kastrace kocoura',
-        basePrice: 1500,
+        basePrice: 1000,
         description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování kocoura.',
+        includes: [
+            'Předoperační vyšetření',
+            'Anestezie',
+            'Chirurgický zákrok',
+            'Pooperační péče'
+        ],
+        additionalCosts: [
+            'Léky po zákroku: +300 Kč',
+            'Ochranný límec: +150 Kč'
+        ],
+        note: 'Cena zahrnuje základní výkon a anestezii.'
+    },
+    'kastrace-kočky': {
+        title: 'Kastrace kočky',
+        basePrice: 1600,
+        description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování kočky.',
+        includes: [
+            'Předoperační vyšetření',
+            'Anestezie',
+            'Chirurgický zákrok',
+            'Pooperační péče'
+        ],
+        additionalCosts: [
+            'Léky po zákroku: +300 Kč',
+            'Ochranný límec: +150 Kč'
+        ],
+        note: 'Cena zahrnuje základní výkon a anestezii.'
+    },
+    'kastrace-pes': {
+        title: 'Kastrace psa',
+        basePrice: 1800,
+        description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování psa.',
         includes: [
             'Předoperační vyšetření',
             'Anestezie',
@@ -569,7 +597,7 @@
     },
     'kastrace-feny': {
         title: 'Kastrace feny',
-        basePrice: 3000,
+        basePrice: 3500,
         description: 'Komplexní chirurgický zákrok u fen, který předchází nechtěné březosti a snižuje riziko onemocnění.',
         includes: [
             'Předoperační vyšetření',
@@ -585,16 +613,16 @@
     },
     'dentalni-hygiena': {
         title: 'Dentální hygiena',
-        basePrice: 1200,
+        basePrice: 1700,
         description: 'Komplexní dentální péče včetně odstranění zubního kamene.',
         includes: [
             'Vyšetření dutiny ústní',
             'Odstranění zubního kamene',
             'Leštění zubů',
-            'Fluoridace'
+            'Fluoridace',
+            'Anestezie'
         ],
         additionalCosts: [
-            'Anestezie: +400 Kč',
             'Extrakce zubů: +300 Kč/zub',
             'Antibiotika: +200 Kč'
         ],
@@ -602,7 +630,7 @@
     },
     'ultrazvuk': {
         title: 'Ultrazvukové vyšetření',
-        basePrice: 900,
+        basePrice: 500,
         description: 'Ultrazvukové vyšetření vnitřních orgánů.',
         includes: [
             'Vyšetření břicha',
