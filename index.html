@@ -80,6 +80,28 @@
         }
 
         /* Tmavý režim */
+        /* Lepší čitelnost v dark mode */
+body.dark .text-gray-900 { color: #f3f4f6; } /* hlavní text – názvy dnů */
+body.dark .text-gray-800 { color: #e5e7eb; }
+body.dark .text-gray-700 { color: #d1d5db; } /* záhlaví tabulek apod. */
+/* Ceník – kategorie (dark mode) */
+body.dark .category-btn:not(.active) {
+  background: #374151;   /* gray-700 */
+  color: #e5e7eb;        /* gray-200 */
+  opacity: 1;            /* přepíše případnou opacity-50 */
+}
+
+/* volitelné: hover v dark režimu */
+body.dark .category-btn:not(.active):hover {
+  background: #4b5563;   /* gray-600 */
+}
+
+/* pro světlý režim může zůstat decentní vzhled */
+.category-btn:not(.active) {
+  background: #e5e7eb;   /* gray-200 */
+  color: #4b5563;        /* gray-600 */
+}
+
         body.dark {
             background-color: #0f1a1e;
             color: #e5e7eb;
@@ -163,6 +185,12 @@
                     <a href="#cenik" class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Ceník</a>
                     <a href="#kontakt" class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Kontakt</a>
                 </nav>
+
+                <!-- Call button -->
+                <a href="tel:601380388" class="hidden md:flex items-center bg-accent hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md">
+                    <i class="fas fa-phone mr-2"></i>
+                    <span>601 380 388</span>
+                </a>
                 
                 <!-- Dark mode toggle -->
                 <button id="dark-mode-toggle" aria-label="Přepnout tmavý režim" class="text-white hover:text-accent transition">
@@ -273,51 +301,153 @@
                 <div class="w-20 h-1 bg-accent mx-auto"></div>
             </div>
             
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">Služba</th>
-                            <th class="py-3 px-4 text-right">Cena</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="vstupni-vysetreni">
-                            <td class="py-3 px-4">Klinické vyšetření</td>
-                            <td class="py-3 px-4 text-right">350 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ockovani-zakladni">
-                            <td class="py-3 px-4">Očkování</td>
-                            <td class="py-3 px-4 text-right">620 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kocoura">
-                            <td class="py-3 px-4">Kastrace kocoura</td>
-                            <td class="py-3 px-4 text-right">1 000 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kočky">
-                            <td class="py-3 px-4">Kastrace kočky</td>
-                            <td class="py-3 px-4 text-right">1 600 Kč</td>
-                            </tr>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-pes">
-                            <td class="py-3 px-4">Kastrace psa</td>
-                            <td class="py-3 px-4 text-right">1 800 Kč</td>
-                            </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-feny">
-                            <td class="py-3 px-4">Kastrace feny</td>
-                            <td class="py-3 px-4 text-right">3 500 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="dentalni-hygiena">
-                            <td class="py-3 px-4">Dentální hygiena</td>
-                            <td class="py-3 px-4 text-right">1 700 Kč</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ultrazvuk">
-                            <td class="py-3 px-4">Ultrazvukové vyšetření</td>
-                            <td class="py-3 px-4 text-right">500 Kč</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Category Navigation -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="category-btn active bg-primary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-90" data-category="vysetreni">
+                    <i class="fas fa-stethoscope mr-2"></i>Vyšetření
+                </button>
+                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300" data-category="chirurgie">
+                    <i class="fas fa-cut mr-2"></i>Chirurgie
+                </button>
+                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300" data-category="preventivni">
+                    <i class="fas fa-shield-alt mr-2"></i>Preventivní péče
+                </button>
+                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300" data-category="specializovane">
+                    <i class="fas fa-microscope mr-2"></i>Specializované
+                </button>
+                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300" data-category="ostatni">
+                    <i class="fas fa-plus mr-2"></i>Ostatní
+                </button>
             </div>
+            
+            <!-- Services by Category -->
+            <div id="services-content">
+                <!-- Vyšetření Category -->
+                <div class="category-content" id="category-vysetreni">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Služba</th>
+                                    <th class="py-3 px-4 text-right">Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="vstupni-vysetreni">
+                                    <td class="py-3 px-4">Klinické vyšetření</td>
+                                    <td class="py-3 px-4 text-right">350 Kč</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ultrazvuk">
+                                    <td class="py-3 px-4">Ultrazvukové vyšetření</td>
+                                    <td class="py-3 px-4 text-right">500 Kč</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Chirurgie Category -->
+                <div class="category-content hidden" id="category-chirurgie">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Služba</th>
+                                    <th class="py-3 px-4 text-right">Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kocoura">
+                                    <td class="py-3 px-4">Kastrace kocoura</td>
+                                    <td class="py-3 px-4 text-right">1 000 Kč</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-kočky">
+                                    <td class="py-3 px-4">Kastrace kočky</td>
+                                    <td class="py-3 px-4 text-right">1 600 Kč</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-pes">
+                                    <td class="py-3 px-4">Kastrace psa</td>
+                                    <td class="py-3 px-4 text-right">1 800 Kč</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="kastrace-feny">
+                                    <td class="py-3 px-4">Kastrace feny</td>
+                                    <td class="py-3 px-4 text-right">3 500 Kč</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Preventivní péče Category -->
+                <div class="category-content hidden" id="category-preventivni">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Služba</th>
+                                    <th class="py-3 px-4 text-right">Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ockovani-zakladni">
+                                    <td class="py-3 px-4">Očkování</td>
+                                    <td class="py-3 px-4 text-right">620 Kč</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Specializované Category -->
+                <div class="category-content hidden" id="category-specializovane">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Služba</th>
+                                    <th class="py-3 px-4 text-right">Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="dentalni-hygiena">
+                                    <td class="py-3 px-4">Dentální hygiena</td>
+                                    <td class="py-3 px-4 text-right">1 700 Kč</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="ortopedie">
+                                    <td class="py-3 px-4">Ortopedické vyšetření</td>
+                                    <td class="py-3 px-4 text-right">800 Kč</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Ostatní Category -->
+<!-- Ostatní Category -->
+<div class="category-content hidden" id="category-ostatni">
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">Služba</th>
+            <th class="py-3 px-4 text-right">Cena</th>
+          </tr>
+        </thead>
+  
+        <tbody class="divide-y divide-gray-200">
+          <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="eutanazie">
+            <td class="py-3 px-4">Eutanazie</td>
+            <td class="py-3 px-4 text-right">800 Kč</td>
+          </tr>
+          <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm" data-service="domaci-eutanazie">
+            <td class="py-3 px-4">Domácí eutanazie</td>
+            <td class="py-3 px-4 text-right">1 600 Kč</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
             
             <!-- Service Details Section -->
             <div id="service-details" class="mt-8 hidden">
@@ -350,59 +480,91 @@
                 <div class="w-20 h-1 bg-accent mx-auto"></div>
             </div>
             
-            <div class="flex flex-col gap-8">
-                <div class="w-full">
-                    <div id="contact-card" class="bg-white p-6 rounded-lg shadow-sm" style="background-image: url('vetoreaphone.png'); background-position: right center; background-repeat: no-repeat; background-size: contain; transition: background-image 0.3s ease-in-out;">
-                        <h3 class="text-xl font-semibold text-primary mb-4">Kontaktní údaje</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Opening Hours Card -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fas fa-clock text-secondary mr-3"></i>
+                        Ordinační doba
+                    </h3>
+                    
+                    <div class="overflow-hidden">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-sm font-semibold text-gray-700">Den</th>
+                                    <th class="py-3 px-4 text-left text-sm font-semibold text-gray-700">Doba</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Pondělí</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">11:00 - 14:00</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Úterý</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">18:00 - 20:00</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Středa</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Objednaní pacienti</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Čtvrtek</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">8:30 - 11:30<br>18:00 - 20:00</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Pátek</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Objednaní pacienti</td>
+                                </tr>
+                                <tr class="hover:bg-blue-50 transition-colors bg-blue-50">
+                                    <td class="py-3 px-4 text-sm font-medium text-gray-900">Ostatní dny</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Pouze po objednání</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Contact Information Card -->
+                <div class="bg-white p-6 rounded-lg shadow-sm relative" style="background-image: url('vetoreaphone.png'); background-position: right bottom; background-repeat: no-repeat; background-size: 180px auto;">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fas fa-address-book text-secondary mr-3"></i>
+                        Kontaktní údaje
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-secondary text-2xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-primary mb-1">Adresa</h4>
+                                <p class="text-gray-600">Brněnská 104/27<br>671 72 Miroslav</p>
+                            </div>
+                        </div>
                         
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="text-secondary text-xl mr-3 mt-1">
-                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-primary">Adresa</h4>
-                                    <p class="text-gray-600">Brněnská 104/27,<br>671 72 Miroslav</p>
-                                </div>
+                        <div class="flex items-start">
+                            <div class="text-secondary text-2xl mr-4 mt-1">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-secondary text-xl mr-3 mt-1">
-                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-primary">Telefon</h4>
-                                    <p class="text-gray-600"><a href="tel:601380388" class="text-secondary hover:underline">601 380 388</a></p>
-
-                                </div>
+                            <div>
+                                <h4 class="font-semibold text-primary mb-1">Telefon</h4>
+                                <p class="text-gray-600">
+                                    <a href="tel:601380388" class="text-secondary hover:underline text-lg font-medium">601 380 388</a>
+                                </p>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-secondary text-xl mr-3 mt-1">
-                                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-primary">Email</h4>
-                                    <p class="text-gray-600"><a href="mailto:veterina.kolarova@seznam.cz" class="text-secondary hover:underline">veterina.kolarova@seznam.cz</a></p>
-
-                                </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-secondary text-2xl mr-4 mt-1">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-secondary text-xl mr-3 mt-1">
-                                    <i class="fas fa-clock" aria-hidden="true"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-primary">Ordinační doba</h4>
-                                    <p class="text-gray-600">
-                                        Pondělí: 11:00 - 14:00<br>
-                                        Úterý: 18:00 - 20:00<br>
-                                        Středa: Objednaní pacienti<br>
-                                        Čtvrtek: 8:30 - 11:30, 18:00 - 20:00<br>
-                                        Pátek: Objednaní pacienti<br>
-                                        <span class="block mt-2">Ostatní dny pouze po objednání po telefonu.</span>
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="font-semibold text-primary mb-1">Email</h4>
+                                <p class="text-gray-600">
+                                    <a href="mailto:veterina.kolarova@seznam.cz" class="text-secondary hover:underline break-all">veterina.kolarova@seznam.cz</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -458,9 +620,9 @@
                 light: 'vetorea_final_idk.png',
                 dark: 'vetorea_final_dark.png'  // Zde změňte název na váš tmavý obrázek
             },
-            contact: {
+            phone: {
                 light: 'vetoreaphone.png',
-                dark: 'vetoreaphone_dark.png'   // Zde změňte název na váš tmavý kontaktní obrázek
+                dark: 'vetoreaphone_dark.png'
             }
         };
 
@@ -478,13 +640,15 @@
             }, 150);
         }
 
-        // Funkce pro změnu pozadí kontaktní karty
-        function updateContactBackground(isDark) {
-            const contactCard = document.getElementById('contact-card');
-            const imageSrc = isDark ? images.contact.dark : images.contact.light;
-            
-            contactCard.style.backgroundImage = `url('${imageSrc}')`;
+        // Funkce pro změnu obrázku telefonu
+        function updatePhoneImage(isDark) {
+            const phoneCard = document.querySelector('.bg-white.p-6.rounded-lg.shadow-sm.relative');
+            if (phoneCard) {
+                const imageSrc = isDark ? images.phone.dark : images.phone.light;
+                phoneCard.style.backgroundImage = `url('${imageSrc}')`;
+            }
         }
+
 
         // Dark mode toggle
         const toggleBtn = document.getElementById('dark-mode-toggle');
@@ -501,7 +665,7 @@
             
             // Změnit obrázky
             updateHeroImage(isDark);
-            updateContactBackground(isDark);
+            updatePhoneImage(isDark);
         });
 
         // Načíst preferenci tmavého režimu při načtení stránky
@@ -510,8 +674,33 @@
             document.body.classList.add('dark');
             darkModeIcon.className = 'fas fa-sun text-xl';
             updateHeroImage(true);
-            updateContactBackground(true);
+            updatePhoneImage(true);
         }
+
+        // Category navigation
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active', 'bg-primary', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                
+                // Hide all category contents
+                document.querySelectorAll('.category-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show selected category content
+                document.getElementById(`category-${category}`).classList.remove('hidden');
+            });
+        });
 
         // Service details data
         const serviceDetails = {
@@ -644,6 +833,50 @@
             'Kontrolní vyšetření: +600 Kč'
         ],
         note: 'Cena zahrnuje základní ultrazvukové vyšetření. Speciální vyšetření se účtují zvlášť.'
+    },
+    'eutanazie': {
+        title: 'Eutanazie',
+        basePrice: 800,
+        description: 'Eutanazie v ordinaci. Provozováno vždy v přítomnosti vlastníka mazlíčka.',
+        includes: [
+            'Eutanazie v ordinaci',
+        ],
+        additionalCosts: [
+
+        ],
+        note: 'Cena zahrnuje základní službu.'
+    },
+    'domaci-eutanazie': {
+        title: 'Domácí eutanazie',
+        basePrice: 1600,
+        description: 'Rozloučení s vaším mazlíčkem v domácím prostředí, kde se cítí v bezpečí a pohodlí.',
+        includes: [
+            'Domácí návštěva veterináře',
+            'Předběžné vyšetření',
+            'Eutanazie v domácím prostředí',
+        ],
+        additionalCosts: [
+
+        ],
+        note: 'Cena zahrnuje základní službu.'
+    },
+    'ortopedie': {
+        title: 'Ortopedické vyšetření',
+        basePrice: 800,
+        description: 'Specializované vyšetření pohybového aparátu, kloubů a kostí vašich mazlíčků.',
+        includes: [
+            'Ortopedické vyšetření',
+            'Vyšetření kloubů a kostí',
+            'Diagnostika pohybových problémů',
+            'Doporučení léčby'
+        ],
+        additionalCosts: [
+            'RTG vyšetření: +400 Kč',
+            'Speciální anestezie: +500 Kč',
+            'Ortopedické pomůcky: +300 Kč',
+            'Fyzioterapie: +600 Kč'
+        ],
+        note: 'Cena zahrnuje základní ortopedické vyšetření. RTG a další vyšetření se účtují zvlášť.'
     }
 };
 
@@ -750,5 +983,3 @@
     </script>
 </body>
 </html>
-
-
