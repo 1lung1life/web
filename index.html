@@ -30,12 +30,34 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        /* Phone Vibration Animation */
+        @keyframes phone-vibrate {
+            0% { transform: rotate(0deg) scale(1); }
+            15% { transform: rotate(-15deg) scale(1.15); }
+            30% { transform: rotate(15deg) scale(1.15); }
+            45% { transform: rotate(-10deg) scale(1.15); }
+            60% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-5deg) scale(1.15); }
+            90% { transform: rotate(5deg) scale(1.15); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .call-btn-icon {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .call-btn:hover .call-btn-icon {
+            animation: phone-vibrate 0.6s ease-in-out 2;
+        }
+
         .nav-link:hover {
             color: #1cb3a4 !important;
         }
 
         .btn-primary {
             background-color: #77bf3c;
+            border: 2px solid transparent;
             transition: all 0.3s ease;
         }
 
@@ -204,6 +226,31 @@
             color: #93c5fd;
         }
 
+        :root {
+            --flash-color: rgba(119, 191, 60, 0.25);
+            --flash-color-mid: rgba(119, 191, 60, 0.45);
+        }
+        body.dark {
+            --flash-color: rgba(90, 145, 45, 0.3);
+            --flash-color-mid: rgba(90, 145, 45, 0.55);
+        }
+        @keyframes flashHighlight {
+            0%, 100% {
+                background-color: transparent;
+            }
+            25%, 75% {
+                background-color: var(--flash-color);
+            }
+            50% {
+                background-color: var(--flash-color-mid);
+            }
+        }
+        .flash-active {
+            animation: flashHighlight 1.5s ease-in-out;
+        }
+
+
+
         body.dark .hero-pattern {
             background-image: radial-gradient(#2dd4bf33 1px, transparent 1px);
             background-size: 20px 20px;
@@ -233,6 +280,489 @@
                 opacity: 0.5;
             }
         }
+
+        /* Donate Modal & Floating Button Styles */
+        .modal-content {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        body.dark .modal-content {
+            background-color: #1f2937 !important;
+            border-color: #374151;
+        }
+
+        /* Donate Floating Elements Slide States */
+        #donate-floating-container {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        #donate-floating-container.minimized {
+            transform: translateX(calc(100% + 40px)) !important;
+        }
+        #donate-restore-tab {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        #donate-restore-tab.hidden-tab {
+            transform: translateX(100%) !important;
+        }
+
+        /* Floating elements hover styling */
+        #donate-floating-container:hover,
+        #donate-restore-tab:hover {
+            background-color: #5fa330 !important;
+        }
+        body.dark #donate-floating-container,
+        body.dark #donate-restore-tab {
+            background-color: #5a912d !important;
+        }
+        body.dark #donate-floating-container:hover,
+        body.dark #donate-restore-tab:hover {
+            background-color: #4a7b25 !important;
+        }
+        
+        /* Amount buttons styling and hover animations (matches btn-primary) */
+        .amount-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .amount-btn:hover {
+            transform: translateY(-2px) !important;
+            background-color: #5fa330 !important;
+            color: white !important;
+        }
+        .amount-btn.bg-accent {
+            background-color: #77bf3c !important;
+            color: white !important;
+        }
+        body.dark .amount-btn {
+            background-color: #374151 !important;
+            color: #e5e7eb !important;
+        }
+        body.dark .amount-btn:hover {
+            background-color: #4a7b25 !important;
+            color: white !important;
+        }
+        body.dark .amount-btn.bg-accent {
+            background-color: #5a912d !important;
+            color: white !important;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        body.dark .modal-content {
+            background: #1f2937 !important;
+            color: #e5e7eb;
+        }
+
+        .success-desc {
+            color: #111827 !important;
+        }
+        body.dark .success-desc {
+            color: #f3f4f6 !important;
+        }
+
+        body.dark .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* amount-btn styles are consolidated above */
+
+        body.dark input,
+        body.dark textarea {
+            background: #374151;
+            color: #e5e7eb;
+            border-color: #4b5563;
+        }
+
+        body.dark input:focus,
+        body.dark textarea:focus {
+            border-color: #5a912d;
+        }
+
+        /* Donors slider styles */
+        #donors-slider {
+            display: flex;
+            will-change: transform;
+        }
+
+        #donors-slider > div {
+            flex-shrink: 0;
+        }
+
+        .donor-dot {
+            cursor: pointer;
+        }
+
+        .donor-dot:hover {
+            transform: scale(1.2);
+        }
+
+        #prev-donor, #next-donor {
+            opacity: 0.8;
+        }
+
+        #prev-donor:hover, #next-donor:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            #prev-donor, #next-donor {
+                padding: 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* --- Service Icon Micro-animations --- */
+        
+        /* 1. Syringe Animation */
+        .service-card:hover .syringe-plunger {
+            animation: syringe-push 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .syringe-liquid {
+            animation: syringe-liquid-empty 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .syringe-droplet-1 {
+            animation: drop-shoot-1 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .syringe-droplet-2 {
+            animation: drop-shoot-2 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .syringe-droplet-3 {
+            animation: drop-shoot-3 1.5s ease-in-out infinite;
+        }
+
+        @keyframes syringe-push {
+            0%, 100% { transform: translateY(0); }
+            40%, 60% { transform: translateY(12px); }
+        }
+        @keyframes syringe-liquid-empty {
+            0%, 100% { transform: scaleY(1); transform-origin: 32px 43px; }
+            40%, 60% { transform: scaleY(0.35); transform-origin: 32px 43px; }
+        }
+        @keyframes drop-shoot-1 {
+            0%, 40% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+            52%, 70% { opacity: 1; transform: translate(-6px, 10px) scale(1); }
+            85%, 100% { opacity: 0; transform: translate(-8px, 18px) scale(0.3); }
+        }
+        @keyframes drop-shoot-2 {
+            0%, 40% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+            52%, 70% { opacity: 1; transform: translate(0, 14px) scale(1); }
+            85%, 100% { opacity: 0; transform: translate(0, 24px) scale(0.3); }
+        }
+        @keyframes drop-shoot-3 {
+            0%, 40% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+            52%, 70% { opacity: 1; transform: translate(6px, 10px) scale(1); }
+            85%, 100% { opacity: 0; transform: translate(8px, 18px) scale(0.3); }
+        }
+
+        /* 2. Stethoscope Animation */
+        .service-card:hover .stetho-body {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .stetho-heart {
+            animation: heart-pulse 1.5s ease-in-out infinite;
+        }
+        .service-card:hover .stetho-wave-1 {
+            animation: ripple-scale 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+        }
+        .service-card:hover .stetho-wave-2 {
+            animation: ripple-scale 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.06); }
+            28% { transform: scale(1.01); }
+            42% { transform: scale(1.06); }
+            70% { transform: scale(1); }
+        }
+        @keyframes heart-pulse {
+            0%, 100% { transform: scale(1); transform-origin: 32px 24px; }
+            14% { transform: scale(1.2); transform-origin: 32px 24px; }
+            28% { transform: scale(1.05); transform-origin: 32px 24px; }
+            42% { transform: scale(1.2); transform-origin: 32px 24px; }
+            70% { transform: scale(1); transform-origin: 32px 24px; }
+        }
+        @keyframes ripple-scale {
+            0% {
+                transform: scale(0.6);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        /* 3. Scalpel & Paw Animation */
+        .service-card:hover .scalpel-main {
+            animation: scalpel-cut 2.5s ease-in-out infinite;
+        }
+        .service-card:hover .incision-cut {
+            animation: incision-reveal 2.5s ease-in-out infinite;
+        }
+        .service-card:hover .sparkle-1 {
+            animation: sparkle-glow-1 2.5s ease-in-out infinite;
+        }
+        .service-card:hover .sparkle-2 {
+            animation: sparkle-glow-2 2.5s ease-in-out infinite;
+        }
+        .service-card:hover .paw-bg {
+            animation: paw-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scalpel-cut {
+            0% { transform: translate(18px, 36px) rotate(0deg); }
+            12% { transform: translate(18px, 36px) rotate(-15deg); }
+            50% { transform: translate(46px, 36px) rotate(-8deg); }
+            62% { transform: translate(48px, 30px) rotate(-35deg); }
+            75%, 100% { transform: translate(18px, 36px) rotate(0deg); }
+        }
+        @keyframes incision-reveal {
+            0%, 12% { stroke-dashoffset: 28; opacity: 0; }
+            13% { opacity: 1; }
+            50% { stroke-dashoffset: 0; opacity: 1; }
+            62% { stroke-dashoffset: 0; opacity: 1; }
+            70%, 100% { stroke-dashoffset: 28; opacity: 0; }
+        }
+        @keyframes sparkle-glow-1 {
+            0%, 25% { transform: scale(0); opacity: 0; }
+            32% { transform: scale(1.2) translateY(-4px); opacity: 1; }
+            45%, 100% { transform: scale(0) translateY(-10px); opacity: 0; }
+        }
+        @keyframes sparkle-glow-2 {
+            0%, 38% { transform: scale(0); opacity: 0; }
+            45% { transform: scale(1.2) translateY(-4px); opacity: 1; }
+            58%, 100% { transform: scale(0) translateY(-10px); opacity: 0; }
+        }
+        @keyframes paw-pulse {
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            12%, 62% { opacity: 0.55; transform: scale(1.02); }
+        }
+
+        /* 4. Dental Teeth & Brush Animation */
+        .service-card:hover .brush-main {
+            animation: brush-action 2s ease-in-out infinite;
+        }
+        .service-card:hover .tooth-sparkle {
+            animation: sparkle-glow 2s ease-in-out infinite;
+        }
+        .service-card:hover .foam-bubble-1 {
+            animation: bubble-float-1 2s ease-in-out infinite;
+        }
+        .service-card:hover .foam-bubble-2 {
+            animation: bubble-float-2 2s ease-in-out infinite;
+            animation-delay: 0.4s;
+        }
+        .service-card:hover .foam-bubble-3 {
+            animation: bubble-float-3 2s ease-in-out infinite;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes brush-action {
+            0%, 100% { transform: translate(14px, -3px); }
+            20% { transform: translate(0px, 1px); }
+            35% { transform: translate(8px, 1px); }
+            50% { transform: translate(-4px, 1px); }
+            65% { transform: translate(6px, 1px); }
+            80% { transform: translate(14px, -3px); }
+        }
+        @keyframes sparkle-glow {
+            0%, 75% { transform: scale(0) rotate(0deg); opacity: 0; transform-origin: 16px 20.5px; }
+            85% { transform: scale(1.2) rotate(90deg); opacity: 1; transform-origin: 16px 20.5px; }
+            95%, 100% { transform: scale(0) rotate(180deg); opacity: 0; transform-origin: 16px 20.5px; }
+        }
+        @keyframes bubble-float-1 {
+            0%, 20% { transform: translate(0, 0) scale(0); opacity: 0; }
+            30% { opacity: 0.9; }
+            50% { transform: translate(-6px, -10px) scale(1); opacity: 0.9; }
+            75%, 100% { transform: translate(-10px, -18px) scale(0.4); opacity: 0; }
+        }
+        @keyframes bubble-float-2 {
+            0%, 20% { transform: translate(0, 0) scale(0); opacity: 0; }
+            35% { opacity: 0.9; }
+            55% { transform: translate(4px, -8px) scale(1.1); opacity: 0.9; }
+            80%, 100% { transform: translate(6px, -15px) scale(0.3); opacity: 0; }
+        }
+        @keyframes bubble-float-3 {
+            0%, 20% { transform: translate(0, 0) scale(0); opacity: 0; }
+            30% { opacity: 0.9; }
+            50% { transform: translate(-1px, -12px) scale(1); opacity: 0.9; }
+            75%, 100% { transform: translate(-2px, -20px) scale(0.3); opacity: 0; }
+        }
+
+        /* 5. Laboratory Pipette & Tubes Animation */
+        .service-card:hover .pipette-group {
+            animation: pipette-move 3.5s ease-in-out infinite;
+        }
+        .service-card:hover .tube1-liquid {
+            animation: tube1-empty 3.5s ease-in-out infinite;
+        }
+        .service-card:hover .pipette-liquid {
+            animation: pipette-fill 3.5s ease-in-out infinite;
+        }
+        .service-card:hover .pipette-drop {
+            animation: droplet-fall 3.5s ease-in-out infinite;
+        }
+        .service-card:hover .tube2-liquid {
+            animation: tube2-react 3.5s ease-in-out infinite;
+        }
+        .service-card:hover .tube2-bubble-1 {
+            animation: tube2-bubble-up 3.5s ease-out infinite;
+        }
+        .service-card:hover .tube2-bubble-2 {
+            animation: tube2-bubble-up 3.5s ease-out infinite;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes pipette-move {
+            0%, 100% { transform: translate(0, 0); }
+            15%, 25% { transform: translate(0, 8px); }
+            35%, 45% { transform: translate(0, -2px); }
+            55%, 70% { transform: translate(16px, -2px); }
+            80%, 90% { transform: translate(0, 0); }
+        }
+        @keyframes tube1-empty {
+            0%, 20% { transform: scaleY(1); }
+            30%, 85% { transform: scaleY(0.6); }
+            95%, 100% { transform: scaleY(1); }
+        }
+        @keyframes pipette-fill {
+            0%, 20% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+            30%, 55% { opacity: 1; transform: scaleY(1); transform-origin: bottom; }
+            65%, 100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+        }
+        @keyframes droplet-fall {
+            0%, 58% { opacity: 0; transform: translate(16px, 0) scale(0.5); }
+            60% { opacity: 1; transform: translate(16px, 0) scale(1); }
+            68% { opacity: 1; transform: translate(16px, 12px) scale(1); }
+            70%, 100% { opacity: 0; transform: translate(16px, 14px) scale(0.2); }
+        }
+        @keyframes tube2-react {
+            0%, 68% { fill: #77bf3c; transform: scaleY(1); }
+            72% { fill: #a855f7; transform: scaleY(1.08); transform-origin: 40px 48.5px; }
+            76% { fill: #a855f7; transform: scaleY(0.96); transform-origin: 40px 48.5px; }
+            80%, 90% { fill: #a855f7; transform: scaleY(1); transform-origin: 40px 48.5px; }
+            95%, 100% { fill: #77bf3c; transform: scaleY(1); transform-origin: 40px 48.5px; }
+        }
+        @keyframes tube2-bubble-up {
+            0%, 70% { transform: translateY(0) scale(0); opacity: 0; }
+            75% { opacity: 0.9; }
+            85% { transform: translateY(-8px) scale(1.2); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* 6. Ambulance Animation */
+        .service-card:hover .ambulance-group {
+            animation: drive-away 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        .service-card:hover .ambulance-wheel {
+            animation: spin-wheels 2.5s linear infinite;
+        }
+        .service-card:hover .ambulance-siren {
+            animation: flash-siren 0.4s ease-in-out infinite;
+        }
+        .service-card:hover .ambulance-puff-1 {
+            animation: exhaust-puff 2.5s ease-out infinite;
+        }
+        .service-card:hover .ambulance-puff-2 {
+            animation: exhaust-puff 2.5s ease-out infinite;
+            animation-delay: 0.15s;
+        }
+
+        @keyframes drive-away {
+            0% { transform: translateX(0); }
+            8% { transform: translateX(-2px); }
+            35% { transform: translateX(65px); opacity: 1; }
+            35.001% { transform: translateX(-65px); opacity: 0; }
+            40% { opacity: 1; }
+            70%, 100% { transform: translateX(0); }
+        }
+        @keyframes spin-wheels {
+            0% { transform: rotate(0deg); }
+            8% { transform: rotate(-30deg); }
+            35% { transform: rotate(540deg); }
+            35.001% { transform: rotate(0deg); }
+            40% { transform: rotate(-360deg); }
+            70%, 100% { transform: rotate(0deg); }
+        }
+        @keyframes flash-siren {
+            0%, 100% { fill: #ef4444; }
+            50% { fill: #3b82f6; }
+        }
+        @keyframes exhaust-puff {
+            0%, 8% { transform: translate(0, 0) scale(0.3); opacity: 0; transform-origin: 8px 42px; }
+            12% { opacity: 0.7; }
+            25% { transform: translate(-8px, -2px) scale(1.2); opacity: 0; transform-origin: 8px 42px; }
+            100% { opacity: 0; }
+        }
+
+        /* Responsive Background adaptation for SVG cutout effects */
+        .service-icon-bg-fill {
+            fill: #f9fafb !important;
+        }
+        .service-icon-bg-stroke {
+            stroke: #f9fafb !important;
+        }
+        body.dark .service-icon-bg-fill {
+            fill: #111827 !important;
+        }
+        body.dark .service-icon-bg-stroke {
+            stroke: #111827 !important;
+        }
+
+        #vacation-notice {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, max-height 0.5s ease;
+            max-height: 300px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #vacation-notice.minimized {
+            transform: translateY(-30px);
+            opacity: 0;
+            max-height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            pointer-events: none;
+        }
+        #vacation-restore-tab {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transform: translate(-50%, 0);
+        }
+        #vacation-restore-tab.hidden-tab {
+            transform: translate(-50%, -100%) !important;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -240,8 +770,8 @@
     <!-- Header -->
     <header class="bg-primary text-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-paw text-accent text-2xl" aria-hidden="true"></i>
+            <div class="flex items-center space-x-3">
+                <img src="oreaicon_idk.png" alt="Logo Veterinární ordinace Orea" class="h-9 w-auto object-contain">
                 <h1 class="text-xl font-semibold">Veterinární ordinace <span class="text-accent">Orea</span></h1>
             </div>
 
@@ -251,15 +781,17 @@
                         class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Služby</a>
                     <a href="#cenik"
                         class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Ceník</a>
+                    <a href="#pojisteni"
+                        class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Pojištění</a>
                     <a href="#kontakt"
                         class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Kontakt</a>
                 </nav>
 
                 <!-- Call button -->
                 <a href="tel:601380388"
-                    class="hidden md:flex items-center bg-accent hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md">
-                    <i class="fas fa-phone mr-2"></i>
-                    <span>601 380 388</span>
+                    class="call-btn hidden md:flex items-center bg-accent hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md flex-shrink-0 whitespace-nowrap">
+                    <i class="fas fa-phone call-btn-icon mr-2"></i>
+                    <span class="whitespace-nowrap">601 380 388</span>
                 </a>
 
                 <!-- Dark mode toggle -->
@@ -283,22 +815,60 @@
                 class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Služby</a>
             <a href="#cenik"
                 class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Ceník</a>
+            <a href="#pojisteni"
+                class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Pojištění</a>
             <a href="#kontakt"
                 class="nav-link text-white hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105">Kontakt</a>
+
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="hero-pattern">
+    <section class="hero-pattern relative overflow-hidden">
+        <button id="vacation-restore-tab" onclick="restoreVacationNotice()" class="absolute top-0 left-1/2 z-[10] bg-red-600 text-white px-4 py-1.5 rounded-b-lg shadow-md hover:bg-red-700 transition-all text-xs font-semibold flex items-center gap-1.5 hidden-tab" aria-label="Zobrazit upozornění o dovolené">
+            <i class="fas fa-exclamation-triangle animate-pulse"></i>
+            <span>Zobrazit oznámení</span>
+            <i class="fas fa-chevron-down text-[10px]"></i>
+        </button>
+
+        <div id="vacation-notice" class="container mx-auto px-4 pt-8 md:pt-10 hidden">
+            <div class="bg-red-600 text-white rounded-lg px-4 py-3.5 shadow-lg relative"
+                style="animation: noticeSlideIn 0.5s ease-out;">
+                <button onclick="minimizeVacationNotice()"
+                    class="absolute top-1/2 -translate-y-1/2 right-4 text-white/80 hover:text-white text-lg font-bold"
+                    aria-label="Zavřít oznámení">&times;</button>
+                <div class="flex items-center gap-3 pr-8">
+                    <i class="fas fa-exclamation-triangle text-xl flex-shrink-0"
+                        style="animation: pulse 2s infinite;"></i>
+                    <div>
+                        <p class="vacation-text font-bold text-sm md:text-base"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">Péče o vaše <span
+            <div class="md:w-1/2 mb-10 md:mb-0 text-center flex flex-col items-center mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4 text-center">Péče o vaše <span
                         class="text-accent">mazlíčky</span> s láskou</h2>
-                <p class="text-gray-600 mb-6 text-lg">Profesionální veterinární služby s individuálním přístupem ke
+                <p class="text-gray-600 mb-6 text-lg text-center">Profesionální veterinární služby s individuálním přístupem ke
                     každému pacientovi.</p>
+                <div class="flex flex-col items-center gap-3 mb-6 md:mb-0">
+                    <a href="https://registrpsu.gov.cz/verejne/ZivotniSituace/Detail/8bfbd7a169fb4198873e0cbacb1d75ff"
+                        target="_blank" rel="noopener noreferrer"
+                        class="btn-primary text-white px-6 py-3 rounded-lg font-medium inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 w-64">
+                        <i class="fas fa-id-card mr-2"></i>
+                        Registrace psů
+                    </a>
+                    <button id="scroll-to-hours-btn"
+                        class="btn-primary text-white px-6 py-3 rounded-lg font-medium inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 w-64">
+                        <i class="fas fa-clock mr-2"></i>
+                        Ordinační doba
+                    </button>
+                </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img id="hero-image" src="vetorea_final_idk.png" alt="Logo veterinární ordinace Orea"
+                <img id="hero-image" src="vetorea_final_idk.webp" alt="Logo veterinární ordinace Orea"
                     class="rounded-lg shadow-xl max-w-md w-full h-auto" loading="lazy">
             </div>
         </div>
@@ -314,9 +884,35 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-syringe" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 syringe-svg" style="transform: rotate(-45deg); transform-origin: 32px 32px;">
+                            <!-- Syringe barrel -->
+                            <rect x="26" y="22" width="12" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                            <!-- Liquid inside (empties on push) -->
+                            <rect class="syringe-liquid" x="27.5" y="23.5" width="9" height="21.5" fill="currentColor" opacity="0.35" style="transform-origin: 32px 43px;" />
+                            <!-- Liquid markings on barrel -->
+                            <line x1="29" y1="28" x2="32" y2="28" stroke="currentColor" stroke-width="2" />
+                            <line x1="29" y1="34" x2="32" y2="34" stroke="currentColor" stroke-width="2" />
+                            <line x1="29" y1="40" x2="32" y2="40" stroke="currentColor" stroke-width="2" />
+                            <!-- Needle hub -->
+                            <path d="M30 46 L34 46 L32 50 Z" fill="currentColor" />
+                            <!-- Needle -->
+                            <line x1="32" y1="50" x2="32" y2="58" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <!-- Plunger assembly (moving) -->
+                            <g class="syringe-plunger" style="transform-origin: 32px 22px; transition: transform 0.3s ease;">
+                                <!-- Plunger shaft -->
+                                <rect x="30" y="8" width="4" height="15" fill="currentColor" />
+                                <!-- Plunger top thumb press -->
+                                <line x1="24" y1="8" x2="40" y2="8" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <!-- Plunger piston seal inside barrel -->
+                                <rect x="27.5" y="22" width="9" height="4" fill="currentColor" />
+                            </g>
+                            <!-- Liquid droplets (animating on hover) -->
+                            <circle class="syringe-droplet-1" cx="32" cy="60" r="2.5" fill="currentColor" style="opacity: 0;" />
+                            <circle class="syringe-droplet-2" cx="32" cy="60" r="2.5" fill="currentColor" style="opacity: 0;" />
+                            <circle class="syringe-droplet-3" cx="32" cy="60" r="2.5" fill="currentColor" style="opacity: 0;" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Preventivní péče</h3>
                     <p class="text-gray-600">Pravidelné prohlídky, očkování a odčervení pro udržení zdraví vašeho
@@ -324,9 +920,28 @@
                 </div>
 
                 <!-- Service 2 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-stethoscope" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 stethoscope-svg">
+                            <!-- Binaural / Tubes -->
+                            <g class="stetho-body" style="transform-origin: 32px 32px; transition: transform 0.3s ease;">
+                                <!-- Ear tips -->
+                                <circle cx="20" cy="12" r="2.5" fill="currentColor" />
+                                <circle cx="44" cy="12" r="2.5" fill="currentColor" />
+                                <!-- Ear tubes -->
+                                <path d="M20 12 C20 22, 24 26, 32 28 C40 26, 44 22, 44 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <!-- Bottom winding tube -->
+                                <path d="M32 28 C32 36, 22 38, 32 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <!-- Chestpiece bell -->
+                                <rect x="28" y="44" width="8" height="4" rx="1.5" fill="currentColor" />
+                                <circle cx="32" cy="49" r="5" fill="none" stroke="currentColor" stroke-width="3" />
+                                <!-- Heart in loop -->
+                                <path class="stetho-heart" d="M32 24 C32 24, 30 21, 28 21 C26 21, 24.5 22.5, 24.5 24.5 C24.5 27, 32 31, 32 31 C32 31, 39.5 27, 39.5 24.5 C39.5 22.5, 38 21, 36 21 C34 21, 32 24, 32 24 Z" fill="#ef4444" style="transform-origin: 32px 24px;" />
+                            </g>
+                            <!-- Ripple waves (radiating from chestpiece center: 32, 49) -->
+                            <circle class="stetho-wave-1" cx="32" cy="49" r="6" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity: 0; transform-origin: 32px 49px;" />
+                            <circle class="stetho-wave-2" cx="32" cy="49" r="6" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity: 0; transform-origin: 32px 49px;" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Léčebná péče</h3>
                     <p class="text-gray-600">Diagnostika a léčba onemocnění s využitím moderních veterinárních metod.
@@ -334,27 +949,114 @@
                 </div>
 
                 <!-- Service 3 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-bone" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 scalpel-svg" style="overflow: hidden;">
+                            <!-- Paw print background (low opacity) -->
+                            <g class="paw-bg" style="transform-origin: 32px 32px; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0.35;">
+                                <!-- Top-left toe -->
+                                <circle cx="22" cy="20" r="3.5" fill="currentColor" />
+                                <!-- Middle-left toe -->
+                                <circle cx="28.5" cy="15" r="3.5" fill="currentColor" />
+                                <!-- Middle-right toe -->
+                                <circle cx="35.5" cy="15" r="3.5" fill="currentColor" />
+                                <!-- Top-right toe -->
+                                <circle cx="42" cy="20" r="3.5" fill="currentColor" />
+                                <!-- Large pad -->
+                                <path d="M 32 26 C 26 26, 21 31, 23 37 C 24 40, 27 42, 32 42 C 37 42, 40 40, 41 37 C 43 31, 38 26, 32 26 Z" fill="currentColor" />
+                            </g>
+                            <!-- Incision guide (dotted line) -->
+                            <line class="incision-guide" x1="18" y1="36" x2="46" y2="36" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3,3" stroke-linecap="round" opacity="0.6" />
+                            <!-- Active glowing incision path -->
+                            <line class="incision-cut" x1="18" y1="36" x2="46" y2="36" stroke="#ef4444" stroke-width="3" stroke-linecap="round" style="stroke-dasharray: 28; stroke-dashoffset: 28; transition: stroke-dashoffset 0.3s ease; opacity: 0;" />
+                            <!-- Sparkles / Glow points -->
+                            <circle class="incision-sparkle sparkle-1" cx="28" cy="36" r="1.5" fill="#eab308" style="transform: scale(0); opacity: 0; transform-origin: 28px 36px;" />
+                            <!-- Sparkle 2 -->
+                            <circle class="incision-sparkle sparkle-2" cx="38" cy="36" r="1.5" fill="#eab308" style="transform: scale(0); opacity: 0; transform-origin: 38px 36px;" />
+                            <!-- Scalpel Group -->
+                            <g class="scalpel-main" style="transform: translate(18px, 36px); transform-origin: 0px 0px; transition: transform 0.3s ease;">
+                                <!-- Blade (tilted, tip is at 0,0) -->
+                                <path d="M 0 0 L 8 -8 L 8 -5 C 8 -2, 4 0, 0 0 Z" fill="currentColor" />
+                                <!-- Handle -->
+                                <line x1="8" y1="-8" x2="26" y2="-26" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <!-- Grip lines on handle -->
+                                <line x1="12.5" y1="-15.5" x2="15.5" y2="-12.5" stroke="currentColor" stroke-width="1" />
+                                <line x1="15.5" y1="-18.5" x2="18.5" y2="-15.5" stroke="currentColor" stroke-width="1" />
+                                <line x1="18.5" y1="-21.5" x2="21.5" y2="-18.5" stroke="currentColor" stroke-width="1" />
+                            </g>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Chirurgické zákroky</h3>
                     <p class="text-gray-600">Šetrné operační řešení včetně kastrací a dalších chirurgických výkonů.</p>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-teeth" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 teeth-svg" style="overflow: hidden;">
+                            <!-- Tooth -->
+                            <path d="M20 24 C20 18, 26 18, 32 23 C38 18, 44 18, 44 24 C44 32, 40 40, 38 48 C37 50, 35 50, 34 46 C33 42, 32 40, 32 40 C32 40, 31 42, 30 46 C29 50, 27 50, 26 48 C23 42, 20 32, 20 24 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+                            <!-- Sparkle star -->
+                            <path class="tooth-sparkle" d="M16 16 L17.5 19 L20.5 20.5 L17.5 22 L16 25 L14.5 22 L11.5 20.5 L14.5 19 Z" fill="#eab308" style="transform: scale(0); transform-origin: 16px 20.5px;" />
+                            <!-- Toothbrush (moving) -->
+                            <g class="brush-main" style="transform: translate(14px, -3px); transition: transform 0.3s ease;">
+                                <!-- Handle -->
+                                <path d="M56 19 H36 C34 19, 33 17, 31 17 H22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <!-- Head base -->
+                                <rect x="14" y="16" width="8" height="3" fill="currentColor" rx="1" />
+                                <!-- Bristles -->
+                                <rect x="15" y="19" width="1.5" height="4" rx="0.5" fill="currentColor" />
+                                <rect x="17" y="19" width="1.5" height="4" rx="0.5" fill="currentColor" />
+                                <rect x="19" y="19" width="1.5" height="4" rx="0.5" fill="currentColor" />
+                                <rect x="21" y="19" width="1.5" height="4" rx="0.5" fill="currentColor" />
+                            </g>
+                            <!-- Foam Bubbles -->
+                            <circle class="foam-bubble-1" cx="30" cy="22" r="2" fill="currentColor" style="opacity: 0;" />
+                            <circle class="foam-bubble-2" cx="35" cy="24" r="1.5" fill="currentColor" style="opacity: 0;" />
+                            <circle class="foam-bubble-3" cx="28" cy="25" r="2" fill="currentColor" style="opacity: 0;" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Dentální péče</h3>
                     <p class="text-gray-600">Komplexní stomatologická péče včetně dentální hygieny a extrakcí zubů.</p>
                 </div>
 
                 <!-- Service 5 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-flask" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 flask-svg" style="overflow: hidden;">
+                            <!-- Test tube rack base -->
+                            <line x1="12" y1="52" x2="52" y2="52" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" />
+                            <!-- Tube 1 (left) -->
+                            <!-- Liquid inside Tube 1 -->
+                            <path class="tube1-liquid" d="M21.5 36 V46 C21.5 47, 22.5 48.5, 24 48.5 C25.5 48.5, 26.5 47, 26.5 46 V36 Z" fill="#1cb3a4" opacity="0.75" style="transform-origin: 24px 48.5px;" />
+                            <!-- Tube 1 Glass Outline -->
+                            <path d="M20 28 V46 C20 48, 22 50, 24 50 C26 50, 28 48, 28 46 V28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                            <line x1="18" y1="28" x2="30" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Tube 2 (right) -->
+                            <!-- Liquid inside Tube 2 (changes color on reaction) -->
+                            <path class="tube2-liquid" d="M37.5 38 V46 C37.5 47, 38.5 48.5, 40 48.5 C41.5 48.5, 42.5 47, 42.5 46 V38 Z" fill="#77bf3c" opacity="0.75" style="transform-origin: 40px 48.5px;" />
+                            <!-- Tube 2 Reaction Bubbles -->
+                            <circle class="tube2-bubble-1" cx="39" cy="38" r="1" fill="#ffffff" opacity="0" />
+                            <circle class="tube2-bubble-2" cx="41.5" cy="40" r="0.8" fill="#ffffff" opacity="0" />
+                            <!-- Tube 2 Glass Outline -->
+                            <path d="M36 28 V46 C36 48, 38 50, 40 50 C42 50, 44 48, 44 46 V28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                            <line x1="34" y1="28" x2="46" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Pipette / Dropper (animates: dips, sucks, moves, drops) -->
+                            <g class="pipette-group" style="transform-origin: 24px 6px; transition: transform 0.3s ease;">
+                                <!-- Pipette bulb -->
+                                <ellipse cx="24" cy="6" rx="4.5" ry="5.5" fill="currentColor" />
+                                <!-- Pipette glass shaft -->
+                                <rect x="22.5" y="11" width="3" height="12" fill="none" stroke="currentColor" stroke-width="2" />
+                                <!-- Pipette tip -->
+                                <path d="M22.5 23 L24 26 L25.5 23 Z" fill="currentColor" />
+                                <!-- Liquid inside pipette -->
+                                <rect class="pipette-liquid" x="23.5" y="13" width="1" height="10" fill="#1cb3a4" opacity="0" style="transform-origin: 24px 23px;" />
+                            </g>
+                            <!-- Droplet falling (active during transfer) -->
+                            <circle class="pipette-drop" cx="24" cy="27" r="2.2" fill="#1cb3a4" opacity="0" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Laboratorní diagnostika</h3>
                     <p class="text-gray-600">Analýza krve a dalších vzorků pro přesné určení zdravotního stavu vašeho
@@ -363,9 +1065,35 @@
                 </div>
 
                 <!-- Service 6 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition group service-card">
                     <div class="text-secondary text-4xl mb-4">
-                        <i class="fas fa-ambulance" aria-hidden="true"></i>
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 ambulance-svg" style="overflow: hidden;">
+                            <!-- Exhaust Smoke Clouds -->
+                            <circle class="ambulance-puff-1" cx="8" cy="42" r="3" fill="currentColor" opacity="0" style="transform-origin: 8px 42px;" />
+                            <circle class="ambulance-puff-2" cx="6" cy="43" r="2" fill="currentColor" opacity="0" style="transform-origin: 6px 43px;" />
+                            <!-- Ambulance Group (moving) -->
+                            <g class="ambulance-group" style="transform-origin: 32px 32px; transition: transform 0.3s ease;">
+                                <!-- Ambulance Body -->
+                                <path d="M12 24 H44 C47 24, 50 27, 51 30 L52 35 V44 H12 Z" fill="currentColor" />
+                                <!-- Window -->
+                                <path d="M38 27 H46 C48 27, 49 29, 49 31 L48 35 H38 Z" class="service-icon-bg-fill" stroke="currentColor" stroke-width="2" />
+                                <!-- Cross symbol (cutout or drawn) -->
+                                <path d="M22 34 H28 M25 31 V37" class="service-icon-bg-stroke" stroke-width="2.5" stroke-linecap="round" />
+                                <!-- Siren -->
+                                <path class="ambulance-siren" d="M20 21 H24 V24 H20 Z" fill="#ef4444" />
+                                <!-- Wheels -->
+                                <g class="ambulance-wheel" style="transform-origin: 18px 44px;">
+                                    <circle cx="18" cy="44" r="5" class="service-icon-bg-fill" stroke="currentColor" stroke-width="2.5" />
+                                    <line x1="18" y1="39" x2="18" y2="49" stroke="currentColor" stroke-width="1.5" />
+                                    <line x1="13" y1="44" x2="23" y2="44" stroke="currentColor" stroke-width="1.5" />
+                                </g>
+                                <g class="ambulance-wheel" style="transform-origin: 38px 44px;">
+                                    <circle cx="38" cy="44" r="5" class="service-icon-bg-fill" stroke="currentColor" stroke-width="2.5" />
+                                    <line x1="38" y1="39" x2="38" y2="49" stroke="currentColor" stroke-width="1.5" />
+                                    <line x1="33" y1="44" x2="43" y2="44" stroke="currentColor" stroke-width="1.5" />
+                                </g>
+                            </g>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-primary mb-3">Domácí eutanazie</h3>
                     <p class="text-gray-600">Rozloučení v domácím prostředí, kde se váš mazlíček cítí v bezpečí.</p>
@@ -382,195 +1110,240 @@
                 <div class="w-20 h-1 bg-accent mx-auto"></div>
             </div>
 
-            <!-- Category Navigation -->
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button
-                    class="category-btn active bg-primary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-90"
-                    data-category="vysetreni">
-                    <i class="fas fa-stethoscope mr-2"></i>Vyšetření
-                </button>
-                <button
-                    class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
-                    data-category="chirurgie">
-                    <i class="fas fa-cut mr-2"></i>Chirurgie
-                </button>
-                <button
-                    class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
-                    data-category="preventivni">
-                    <i class="fas fa-shield-alt mr-2"></i>Preventivní péče
-                </button>
-                <button
-                    class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
-                    data-category="specializovane">
-                    <i class="fas fa-microscope mr-2"></i>Specializované
-                </button>
-                <button
-                    class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
-                    data-category="ostatni">
-                    <i class="fas fa-plus mr-2"></i>Ostatní
-                </button>
-            </div>
-
-            <!-- Services by Category -->
-            <div id="services-content">
-                <!-- Vyšetření Category -->
-                <div class="category-content" id="category-vysetreni">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">Služba</th>
-                                    <th class="py-3 px-4 text-right">Cena</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="vstupni-vysetreni">
-                                    <td class="py-3 px-4">Klinické vyšetření</td>
-                                    <td class="py-3 px-4 text-right">350 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="ultrazvuk">
-                                    <td class="py-3 px-4">Ultrazvukové vyšetření</td>
-                                    <td class="py-3 px-4 text-right">500 Kč</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- Services by Category + Side Panel -->
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <!-- Services List (Left - 75%) -->
+                <div class="w-full lg:w-3/4">
+                    <!-- Category Navigation (Centered within the column) -->
+                    <div class="flex flex-wrap justify-center gap-3 mb-6">
+                        <button
+                            class="category-btn active bg-primary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-90"
+                            data-category="vysetreni">
+                            <i class="fas fa-stethoscope mr-2"></i>Vyšetření
+                        </button>
+                        <button
+                            class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
+                            data-category="chirurgie">
+                            <i class="fas fa-cut mr-2"></i>Chirurgie
+                        </button>
+                        <button
+                            class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
+                            data-category="preventivni">
+                            <i class="fas fa-shield-alt mr-2"></i>Preventivní péče
+                        </button>
+                        <button
+                            class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
+                            data-category="specializovane">
+                            <i class="fas fa-microscope mr-2"></i>Specializované
+                        </button>
+                        <button
+                            class="category-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-300"
+                            data-category="ostatni">
+                            <i class="fas fa-plus mr-2"></i>Ostatní
+                        </button>
                     </div>
-                </div>
 
-                <!-- Chirurgie Category -->
-                <div class="category-content hidden" id="category-chirurgie">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">Služba</th>
-                                    <th class="py-3 px-4 text-right">Cena</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="kastrace-kocoura">
-                                    <td class="py-3 px-4">Kastrace kocoura</td>
-                                    <td class="py-3 px-4 text-right">1 000 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="kastrace-kočky">
-                                    <td class="py-3 px-4">Kastrace kočky</td>
-                                    <td class="py-3 px-4 text-right">1 600 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="kastrace-pes">
-                                    <td class="py-3 px-4">Kastrace psa</td>
-                                    <td class="py-3 px-4 text-right">1 800 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="kastrace-feny">
-                                    <td class="py-3 px-4">Kastrace feny</td>
-                                    <td class="py-3 px-4 text-right">3 500 Kč</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Preventivní péče Category -->
-                <div class="category-content hidden" id="category-preventivni">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">Služba</th>
-                                    <th class="py-3 px-4 text-right">Cena</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="ockovani-zakladni">
-                                    <td class="py-3 px-4">Očkování</td>
-                                    <td class="py-3 px-4 text-right">620 Kč</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Specializované Category -->
-                <div class="category-content hidden" id="category-specializovane">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">Služba</th>
-                                    <th class="py-3 px-4 text-right">Cena</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="dentalni-hygiena">
-                                    <td class="py-3 px-4">Dentální hygiena</td>
-                                    <td class="py-3 px-4 text-right">1 700 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="ortopedie">
-                                    <td class="py-3 px-4">Ortopedické vyšetření</td>
-                                    <td class="py-3 px-4 text-right">800 Kč</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Ostatní Category -->
-                <!-- Ostatní Category -->
-                <div class="category-content hidden" id="category-ostatni">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">Služba</th>
-                                    <th class="py-3 px-4 text-right">Cena</th>
-                                </tr>
-                            </thead>
-
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="eutanazie">
-                                    <td class="py-3 px-4">Eutanazie</td>
-                                    <td class="py-3 px-4 text-right">800 Kč</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
-                                    data-service="domaci-eutanazie">
-                                    <td class="py-3 px-4">Domácí eutanazie</td>
-                                    <td class="py-3 px-4 text-right">1 600 Kč</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
-                <!-- Service Details Section -->
-                <div id="service-details" class="mt-8 hidden">
-                    <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-accent">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 id="detail-title" class="text-xl font-semibold text-primary"></h3>
-                            <button id="close-details" class="text-gray-500 hover:text-gray-700"
-                                aria-label="Zavřít detail služby">
-                                <i class="fas fa-times text-xl" aria-hidden="true"></i>
-                            </button>
+                    <div id="services-content">
+                        <!-- Vyšetření Category -->
+                        <div class="category-content" id="category-vysetreni">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">Služba</th>
+                                            <th class="py-3 px-4 text-right">Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-vysetreni" class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="vstupni-vysetreni">
+                                            <td class="py-3 px-4">Klinické vyšetření</td>
+                                            <td class="py-3 px-4 text-right">350 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="ultrazvuk">
+                                            <td class="py-3 px-4">Ultrazvukové vyšetření</td>
+                                            <td class="py-3 px-4 text-right">500 Kč</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div id="detail-content" class="text-gray-600">
-                            <!-- Content will be populated by JavaScript -->
+
+                        <!-- Chirurgie Category -->
+                        <div class="category-content hidden" id="category-chirurgie">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">Služba</th>
+                                            <th class="py-3 px-4 text-right">Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-chirurgie" class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="kastrace-kocoura">
+                                            <td class="py-3 px-4">Kastrace kocoura</td>
+                                            <td class="py-3 px-4 text-right">1 000 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="kastrace-kočky">
+                                            <td class="py-3 px-4">Kastrace kočky</td>
+                                            <td class="py-3 px-4 text-right">1 600 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="kastrace-pes">
+                                            <td class="py-3 px-4">Kastrace psa</td>
+                                            <td class="py-3 px-4 text-right">1 800 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="kastrace-feny">
+                                            <td class="py-3 px-4">Kastrace feny</td>
+                                            <td class="py-3 px-4 text-right">3 500 Kč</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Preventivní péče Category -->
+                        <div class="category-content hidden" id="category-preventivni">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">Služba</th>
+                                            <th class="py-3 px-4 text-right">Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-preventivni" class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="ockovani-zakladni">
+                                            <td class="py-3 px-4">Očkování</td>
+                                            <td class="py-3 px-4 text-right">620 Kč</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Specializované Category -->
+                        <div class="category-content hidden" id="category-specializovane">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">Služba</th>
+                                            <th class="py-3 px-4 text-right">Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-specializovane" class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="dentalni-hygiena">
+                                            <td class="py-3 px-4">Dentální hygiena</td>
+                                            <td class="py-3 px-4 text-right">1 700 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="ortopedie">
+                                            <td class="py-3 px-4">Ortopedické vyšetření</td>
+                                            <td class="py-3 px-4 text-right">800 Kč</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Ostatní Category -->
+                        <div class="category-content hidden" id="category-ostatni">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">Služba</th>
+                                            <th class="py-3 px-4 text-right">Cena</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="table-ostatni" class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="eutanazie">
+                                            <td class="py-3 px-4">Eutanazie</td>
+                                            <td class="py-3 px-4 text-right">800 Kč</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm"
+                                            data-service="domaci-eutanazie">
+                                            <td class="py-3 px-4">Domácí eutanazie</td>
+                                            <td class="py-3 px-4 text-right">1 600 Kč</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Service Details Section -->
+                        <div id="service-details" class="mt-8 hidden">
+                            <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-accent">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 id="detail-title" class="text-xl font-semibold text-primary"></h3>
+                                    <button id="close-details" class="text-gray-500 hover:text-gray-700"
+                                        aria-label="Zavřít detail služby">
+                                        <i class="fas fa-times text-xl" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div id="detail-content" class="text-gray-600">
+                                    <!-- Content will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <p class="text-gray-600">* Ceny jsou orientační. Přesnou cenu určí lékař po vyšetření.</p>
+                            <p class="text-gray-600 mt-2"><strong>Lze platit QR kódem</strong></p>
+                            <p class="text-gray-600 mt-3">💡 Klikněte na službu pro více informací o ceně</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 text-center">
-                    <p class="text-gray-600">* Ceny jsou orientační. Přesnou cenu určí lékař po vyšetření.</p>
-                    <p class="text-gray-600 mt-2"><strong>Lze platit QR kódem</strong></p>
-                    <p class="text-gray-600 mt-3">💡 Klikněte na službu pro více informací o ceně</p>
+                <!-- Insurance Side Panel (Right - 25%) -->
+                <div id="pojisteni" class="w-full lg:w-1/4 lg:sticky lg:top-6 lg:mt-[72px] flex flex-col gap-6">
+                    <!-- PetExpert Card -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col items-center text-center">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex justify-center items-center h-28 w-full mb-4" style="background-color: white !important; border-color: #e5e7eb !important;">
+                            <img src="https://www.petexpert.cz/images/petexpert-trupanion-csob-black.svg" 
+                                 alt="PetExpert Logo" class="max-h-16 w-auto object-contain" loading="lazy">
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Pojištění PetExpert</h3>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-accent mb-3">Partnerská ordinace</p>
+                        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                            Spolupracujeme s pojišťovnou <strong>PetExpert</strong>. Ošetříme vašeho psa či kočku a vy zaplatíte pouze spoluúčast (od 10 %). Zbytek vyřídíme napřímo.
+                        </p>
+                        <a href="https://www.petexpert.cz/" target="_blank" rel="noopener noreferrer" 
+                           class="btn-primary text-white text-sm px-4 py-2.5 rounded-lg font-medium inline-flex items-center shadow-md hover:shadow-lg transition-all duration-300 w-full justify-center">
+                            Více o PetExpert
+                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Direct Card -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col items-center text-center">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex justify-center items-center h-28 w-full mb-4" style="background-color: white !important; border-color: #e5e7eb !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 120" class="max-h-16 w-auto object-contain">
+                                <path fill="#c4de00" d="M31.078 15c5.567 15.714 13.788 19.876 21.853 19.876 5.516 0 9.418-1.977 9.418-1.977l.26.26-36.89 33.509v-13.84l19.72-17.12C21.556 33.056 15 15 15 15z"></path>
+                                <path fill="#1a3f37" d="M175.518 70.292V57.618h7.374l2.185-4.861h-9.559v-8.194h-5.682v25.73c0 7.975 4.48 13.11 14.695 10.324v-4.862c-6.118 1.584-9.013.273-9.013-5.463M87.294 52.75h-5.68v28.134h5.68zm-2.841-11.687c-1.912 0-3.387 1.475-3.387 3.386a3.37 3.37 0 0 0 3.387 3.388 3.37 3.37 0 0 0 3.387-3.388c0-1.911-1.475-3.386-3.387-3.386m24.53 11.141c-5.081-.492-8.85 1.858-10.489 7.593V52.75h-5.681v28.134h5.681V66.517c0-5.245 3.114-8.85 8.85-8.85h1.639zM153.45 81.43c6.773 0 12.127-4.207 12.782-10.435h-6.009c-.491 3.606-3.332 5.627-6.773 5.627-4.48 0-8.085-3.879-8.085-9.779s3.605-9.833 8.085-9.833c3.441 0 6.282 2.022 6.773 5.627h6.009c-.655-6.227-6.009-10.434-12.782-10.434-8.085 0-14.04 5.9-14.04 14.64s5.955 14.586 14.04 14.586Zm-22.778-9.124c-1.093 2.732-3.715 4.425-7.593 4.425-4.371 0-7.976-3.004-8.359-8.303h21.742c.11-.601.164-1.038.164-1.585 0-8.74-5.572-14.64-13.547-14.64-8.086 0-14.04 5.9-14.04 14.64s5.954 14.586 14.04 14.586c6.937 0 11.745-3.715 13.056-9.123zm-7.593-15.405c4.097 0 7.32 2.622 7.866 7.211h-16.17c.71-4.589 4.261-7.211 8.304-7.211M76.098 80.887V41.828h-5.682v16.006c-2.022-3.496-5.299-5.627-9.396-5.627-7.921 0-13.766 5.9-13.766 14.64s5.408 14.587 12.782 14.587c4.699 0 8.305-2.404 10.38-6.228v5.681zm-14.313-4.26c-4.916 0-8.577-3.88-8.577-9.78s3.66-9.832 8.577-9.832c4.97 0 8.631 3.933 8.631 9.833s-3.66 9.778-8.63 9.778ZM82.33 91.852c-1.936 0-3.422.99-4.278 2.566v-2.341h-2.341v16.098h2.341v-6.597c.833 1.441 2.184 2.319 3.873 2.319 3.265 0 5.674-2.409 5.674-6.011s-2.23-6.034-5.269-6.034m-.72 10.064c-2.05 0-3.558-1.599-3.558-4.03s1.508-4.053 3.558-4.053c2.026 0 3.534 1.62 3.534 4.053 0 2.431-1.508 4.03-3.534 4.03m22.246 2.613c0 1.756-1.013 1.982-2.364 1.644v2.004c3.242.675 4.706-.946 4.706-3.535V92.078h-2.342zm-8.465-12.677c-3.49 0-5.989 2.431-5.989 6.034s2.5 6.011 5.99 6.011 5.988-2.409 5.988-6.011-2.498-6.034-5.989-6.034m0 10.064c-2.026 0-3.534-1.599-3.534-4.03s1.508-4.053 3.534-4.053c2.05 0 3.558 1.62 3.558 4.053 0 2.431-1.509 4.03-3.558 4.03m86.413-7.746c-.833-1.44-2.184-2.318-3.872-2.318-3.265 0-5.674 2.431-5.674 6.034s2.229 6.011 5.268 6.011c1.936 0 3.423-.99 4.278-2.566v2.341h2.342V92.077h-2.342zm-3.557 7.746c-2.027 0-3.535-1.599-3.535-4.03s1.508-4.053 3.535-4.053c2.049 0 3.557 1.62 3.557 4.053 0 2.431-1.508 4.03-3.557 4.03M122.7 87.578h-2.004l-1.824 2.072-1.823-2.072H115l2.432 3.265h2.836zm7.543-.562-.45 3.872h1.643l1.126-3.872z"></path>
+                                <path fill="#1a3f37" d="m131.818 94.084.901-2.004h-3.94v-3.377h-2.341v10.605c0 3.287 1.846 5.404 6.056 4.255v-2.004c-2.521.653-3.715.113-3.715-2.251v-5.224zm34.024-2.232c-1.644 0-2.882.742-3.625 2.161v-1.936h-2.342v11.595h2.342v-7.047c0-1.711 1.103-2.792 2.724-2.792 1.689 0 2.702 1.058 2.702 3.174v6.665h2.341v-6.935c0-3.22-1.711-4.885-4.142-4.885m-13.443 9.705-3.288-9.479h-2.521l4.278 11.596h2.927l4.278-11.596h-2.41zm-47.374-14.299c-.788 0-1.396.608-1.396 1.396 0 .765.608 1.396 1.396 1.396s1.396-.63 1.396-1.396c0-.788-.608-1.396-1.396-1.396m5.269 0c-.787 0-1.396.608-1.396 1.396a1.39 1.39 0 0 0 1.396 1.396c.789 0 1.396-.63 1.396-1.396 0-.788-.607-1.396-1.396-1.396m29.61 4.594c-3.49 0-5.99 2.431-5.99 6.034s2.5 6.011 5.99 6.011c3.489 0 5.989-2.409 5.989-6.011s-2.5-6.034-5.989-6.034m0 10.064c-2.027 0-3.536-1.599-3.536-4.03s1.509-4.053 3.536-4.053c2.048 0 3.557 1.62 3.557 4.053 0 2.431-1.509 4.03-3.557 4.03m-28.438-9.838h-2.341v11.596h2.341zm8.917 4.952-2.071-.293c-1.329-.18-1.824-.54-1.824-1.418 0-.946.946-1.576 2.386-1.576 1.689 0 2.477.72 2.567 1.914h2.319c-.112-2.342-1.959-3.805-4.931-3.805-2.859 0-4.683 1.62-4.683 3.557 0 1.914 1.306 2.95 3.535 3.242l2.117.293c1.261.18 1.823.585 1.823 1.464 0 1.058-1.126 1.621-2.792 1.621-1.914 0-2.701-.744-2.791-1.937h-2.319c.112 2.409 2.026 3.805 5.11 3.805 3.108 0 5.134-1.531 5.134-3.557 0-1.914-1.351-3.017-3.58-3.31"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Pojištění Direct</h3>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-accent mb-3">Partnerská ordinace</p>
+                        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                            Spolupracujeme s pojišťovnou <strong>Direct</strong>. Pojištění pro psy a kočky hradí léčbu úrazů zcela bez limitu a přispívá i na prevenci. Vy zaplatíte jen spoluúčast.
+                        </p>
+                        <a href="https://www.direct.cz/mazlicci" target="_blank" rel="noopener noreferrer" 
+                           class="btn-primary text-white text-sm px-4 py-2.5 rounded-lg font-medium inline-flex items-center shadow-md hover:shadow-lg transition-all duration-300 w-full justify-center">
+                            Více o Direct
+                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
     </section>
@@ -582,10 +1355,9 @@
                 <h2 class="text-3xl font-bold text-primary mb-4">Kontaktujte nás</h2>
                 <div class="w-20 h-1 bg-accent mx-auto"></div>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Opening Hours Card -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div id="opening-hours-card" class="bg-white p-6 rounded-lg shadow-sm">
                     
 
                     <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
@@ -638,48 +1410,54 @@
                 </div>
 
                 <!-- Contact Information Card -->
-                <div class="bg-white p-6 rounded-lg shadow-sm relative"
-                    style="background-image: url('vetoreaphone.png'); background-position: right bottom; background-repeat: no-repeat; background-size: 180px auto;">
+                <div id="contact-info-card" class="bg-white p-6 rounded-lg shadow-sm flex flex-col h-full">
                     <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
                         <i class="fas fa-address-book text-secondary mr-3"></i>
                         Kontaktní údaje
                     </h3>
 
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="text-secondary text-2xl mr-4 mt-1">
-                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-6 flex-grow max-w-xl mx-auto w-full">
+                        <div class="space-y-8 sm:space-y-12 flex-grow w-full sm:w-auto -mt-2 sm:-mt-6">
+                            <div class="flex items-start">
+                                <div class="text-secondary text-2xl mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary mb-1">Adresa</h4>
+                                    <p class="text-gray-600">Brněnská 104/27<br>671 72 Miroslav</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-primary mb-1">Adresa</h4>
-                                <p class="text-gray-600">Brněnská 104/27<br>671 72 Miroslav</p>
+
+                            <div class="flex items-start">
+                                <div class="text-secondary text-2xl mr-4 mt-1">
+                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary mb-1">Telefon</h4>
+                                    <p class="text-gray-600">
+                                        <a href="tel:601380388"
+                                            class="text-secondary hover:underline text-lg font-medium">601 380 388</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-secondary text-2xl mr-4 mt-1">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary mb-1">Email</h4>
+                                    <p class="text-gray-600">
+                                        <a href="mailto:veterina.kolarova@seznam.cz"
+                                            class="text-secondary hover:underline break-all">veterina.kolarova@seznam.cz</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flex items-start">
-                            <div class="text-secondary text-2xl mr-4 mt-1">
-                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-primary mb-1">Telefon</h4>
-                                <p class="text-gray-600">
-                                    <a href="tel:601380388"
-                                        class="text-secondary hover:underline text-lg font-medium">601 380 388</a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="text-secondary text-2xl mr-4 mt-1">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-primary mb-1">Email</h4>
-                                <p class="text-gray-600">
-                                    <a href="mailto:veterina.kolarova@seznam.cz"
-                                        class="text-secondary hover:underline break-all">veterina.kolarova@seznam.cz</a>
-                                </p>
-                            </div>
+                        <!-- Telefon logo handset -->
+                        <div class="flex-shrink-0 w-40 sm:w-48 md:w-56 lg:w-48 xl:w-56 flex justify-center items-center">
+                            <img id="contact-phone-img" src="vetoreaphone.webp" alt="Telefon logo" class="max-w-full h-auto object-contain">
                         </div>
                     </div>
                 </div>
@@ -696,25 +1474,27 @@
     </div>
     <div class="h-96 w-full">
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.964234833635!2d16.31296431568319!3d48.9463702023486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712f7e2e2e2e3%3A0x6e2e2e2e2e2e2e2e!2sBrn%C4%9Bnsk%C3%A1%20104%2F27%2C%20671%2072%20Miroslav!5e0!3m2!1scs!2scz!4v1717171717171!5m2!1scs!2scz"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.023249016462!2d16.312681476906297!3d48.94589987929555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712b1f3b4e22d61%3A0x77203aebad3c5a04!2sVeterin%C3%A1rn%C3%AD%20ordinace%20Orea%20-%20Miroslav!5e0!3m2!1scs!2scz!4v1720545600000!5m2!1scs!2scz"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+
+
 
     <!-- Footer -->
     <footer class="bg-primary text-white py-4">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-paw text-accent text-xl" aria-hidden="true"></i>
+                    <div class="flex items-center space-x-3">
+                        <img src="oreaicon_idk.png" alt="Logo Veterinární ordinace Orea" class="h-8 w-auto object-contain">
                         <h2 class="text-lg font-semibold">Veterinární ordinace <span class="text-accent">Orea</span>
                         </h2>
                     </div>
                     <p class="mt-1 text-gray-300 text-sm">Péče o vaše mazlíčky s láskou a odborností</p>
                 </div>
 
-                <div class="flex items-center space-x-2 text-sm">
+                <div class="flex items-center space-x-2 text-sm mt-4 md:mt-0">
                     <span class="text-gray-300">Pro aktuální info:</span>
                     <a href="https://www.facebook.com/p/Veterin%C3%A1rn%C3%AD-ordinace-Orea-100068049579382/"
                         target="_blank" rel="noopener" class="text-gray-300 hover:text-accent transition"
@@ -734,62 +1514,203 @@
         </div>
     </footer>
 
+    <!-- Floating Donate Button Container (Minimalist unified green capsule) -->
+    <div id="donate-floating-container" class="fixed bottom-[30px] right-[30px] z-[1000] flex items-center bg-accent text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hidden">
+        <button id="donate-btn" class="flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-l-lg hover:bg-black hover:bg-opacity-5 transition-all">
+            <i class="fas fa-heart"></i>
+            <span>Přispět</span>
+        </button>
+        <div class="h-6 w-[1px] bg-white bg-opacity-30"></div>
+        <button id="hide-donate-btn" class="px-4 py-3 hover:bg-black hover:bg-opacity-10 rounded-r-lg transition-all" aria-label="Skrýt tlačítko přispění">
+            <i class="fas fa-times text-xs"></i>
+        </button>
+    </div>
+
+    <!-- Floating Restore Tab (Sticks out from side panel) -->
+    <button id="donate-restore-tab" class="fixed bottom-[30px] right-0 z-[1000] bg-accent text-white pl-3 pr-2 py-3 rounded-l-lg shadow-md hover:shadow-lg transform hidden-tab hidden" aria-label="Zobrazit tlačítko přispění">
+        <i class="fas fa-chevron-left text-xs"></i>
+    </button>
+
+    <!-- Donate Modal -->
+    <div id="donate-modal" class="modal-overlay hidden">
+        <div class="modal-content p-6 text-left">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-primary">Přispět na ordinaci ❤️</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 text-2xl" aria-label="Zavřít">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="donate-form">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-primary mb-3">Vyberte částku:</label>
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <button type="button" class="amount-btn bg-gray-100 hover:bg-accent hover:text-white text-gray-700 py-3 px-4 rounded-lg font-medium transition-all" data-amount="10">10 Kč</button>
+                        <button type="button" class="amount-btn bg-gray-100 hover:bg-accent hover:text-white text-gray-700 py-3 px-4 rounded-lg font-medium transition-all" data-amount="20">20 Kč</button>
+                        <button type="button" class="amount-btn bg-gray-100 hover:bg-accent hover:text-white text-gray-700 py-3 px-4 rounded-lg font-medium transition-all" data-amount="50">50 Kč</button>
+                        <button type="button" class="amount-btn bg-gray-100 hover:bg-accent hover:text-white text-gray-700 py-3 px-4 rounded-lg font-medium transition-all" data-amount="100">100 Kč</button>
+                        <button type="button" class="amount-btn bg-accent text-white py-3 px-4 rounded-lg font-medium transition-all" data-amount="200">200 Kč</button>
+                        <button type="button" class="amount-btn bg-gray-100 hover:bg-accent hover:text-white text-gray-700 py-3 px-4 rounded-lg font-medium transition-all" data-amount="500">500 Kč</button>
+                    </div>
+                    <div class="mt-3">
+                          <label class="block text-sm font-medium text-primary mb-2">Nebo zadejte vlastní částku:</label>
+                          <input type="number" id="custom-amount" min="10" max="10000" placeholder="Např. 150" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent">
+                          <p class="text-xs text-gray-500 mt-1">Minimální částka je 10 Kč, maximální 10 000 Kč</p>
+                    </div>
+                </div>
+                
+
+                
+                <div id="qr-section" class="hidden mb-6">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center dark:bg-gray-700" style="background-color: #f9fafb !important;">
+                        <p class="text-sm text-gray-600 mb-3" style="color: #4b5563 !important;">Naskenujte QR kód pro platbu:</p>
+                        <div id="qrcode" class="flex justify-center mb-3"></div>
+                        <p class="text-sm font-semibold text-primary" id="amount-display" style="color: #063b4a !important;"></p>
+                        <p class="text-xs text-gray-500 mt-2" style="color: #6b7280 !important;">Platbu provedete naskenováním QR kódu ve vaší bankovní aplikaci.</p>
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <button type="button" id="cancel-donate" class="w-full py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">
+                        Zavřít
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[9999]"></canvas>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay hidden">
+        <div class="modal-content p-8 text-center max-w-sm transform scale-95 opacity-0 transition-all duration-300 flex flex-col items-center">
+            <div class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex justify-center items-center mb-6">
+                <i class="fas fa-heart text-accent text-4xl animate-pulse"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold text-primary mb-3">Děkujeme Vám za příspěvek!</h3>
+            <p class="success-desc text-base font-semibold mb-6 leading-relaxed">
+                Vaše podpora nám pomáhá neustále zlepšovat péči o zvířecí pacienty. Velice si toho vážíme!
+            </p>
+            <button id="close-success-btn" class="btn-primary text-white w-full py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                Zavřít
+            </button>
+        </div>
+    </div>
+
     <script>
-        // Definice obrázků pro světlý a tmavý režim
+  
+        const GOOGLE_SHEET_ID = '2PACX-1vQkTuERiOyEuzDdqjaMqMSPUd6wqZxxyJsbtoUJPld1fCD9VvxRm-1xwefXzyI7Q_hV--8q1pWO59HS'; 
+        const GID_CENIK = '0';           
+        const GID_NASTAVENI = '1136850674';     
+
+        
+        let ZOBRAZIT_OZNAMENI = false;
+        let TEXT_OZNAMENI = "";
+        let ZOBRAZIT_PRISPET = false;
+        let DONATE_ACCOUNT_NUMBER = '';
+        let DONATE_BANK_CODE = '';
+
+        const vacationNotice = document.getElementById('vacation-notice');
+        const vacationRestoreTab = document.getElementById('vacation-restore-tab');
+        const donateFloatingContainer = document.getElementById('donate-floating-container');
+        const donateRestoreTab = document.getElementById('donate-restore-tab');
+
+        function updateVacationNoticeUI() {
+            if (vacationNotice) {
+                const textElement = vacationNotice.querySelector('.vacation-text');
+                if (textElement) {
+                    textElement.textContent = TEXT_OZNAMENI;
+                }
+                if (ZOBRAZIT_OZNAMENI) {
+                    const closedText = localStorage.getItem('vacationNoticeClosedText');
+                    if (closedText === TEXT_OZNAMENI) {
+                        vacationNotice.classList.remove('hidden');
+                        vacationNotice.classList.add('minimized');
+                        if (vacationRestoreTab) {
+                            vacationRestoreTab.classList.remove('hidden-tab');
+                        }
+                    } else {
+                        vacationNotice.classList.remove('hidden', 'minimized');
+                        if (vacationRestoreTab) {
+                            vacationRestoreTab.classList.add('hidden-tab');
+                        }
+                    }
+                } else {
+                    vacationNotice.classList.add('hidden');
+                    if (vacationRestoreTab) {
+                        vacationRestoreTab.classList.add('hidden-tab');
+                    }
+                }
+            }
+        }
+
+        function minimizeVacationNotice() {
+            if (vacationNotice) {
+                vacationNotice.classList.add('minimized');
+                localStorage.setItem('vacationNoticeClosedText', TEXT_OZNAMENI);
+            }
+            if (vacationRestoreTab) {
+                vacationRestoreTab.classList.remove('hidden-tab');
+            }
+        }
+
+        function restoreVacationNotice() {
+            if (vacationNotice) {
+                vacationNotice.classList.remove('minimized');
+                localStorage.removeItem('vacationNoticeClosedText');
+            }
+            if (vacationRestoreTab) {
+                vacationRestoreTab.classList.add('hidden-tab');
+            }
+        }
+
         const images = {
             hero: {
-                light: 'vetorea_final_idk.png',
-                dark: 'vetorea_final_dark.png'  // Zde změňte název na váš tmavý obrázek
+                light: 'vetorea_final_idk.webp',
+                dark: 'vetorea_final_dark.webp'
             },
             phone: {
-                light: 'vetoreaphone.png',
-                dark: 'vetoreaphone_dark.png'
+                light: 'vetoreaphone.webp',
+                dark: 'vetoreaphone_dark.webp'
             }
         };
 
-        // Funkce pro změnu obrázku
         function updateHeroImage(isDark) {
             const heroImage = document.getElementById('hero-image');
             const imageSrc = isDark ? images.hero.dark : images.hero.light;
 
-            // Plynulý přechod
             heroImage.style.opacity = '0.5';
 
             setTimeout(() => {
                 heroImage.src = imageSrc;
                 heroImage.style.opacity = '1';
-            }, 150);
+            }, 300);
         }
 
-        // Funkce pro změnu obrázku telefonu
         function updatePhoneImage(isDark) {
-            const phoneCard = document.querySelector('.bg-white.p-6.rounded-lg.shadow-sm.relative');
-            if (phoneCard) {
-                const imageSrc = isDark ? images.phone.dark : images.phone.light;
-                phoneCard.style.backgroundImage = `url('${imageSrc}')`;
-            }
+            const phoneImage = document.getElementById('contact-phone-img');
+            const imageSrc = isDark ? images.phone.dark : images.phone.light;
+
+            phoneImage.style.opacity = '0.5';
+
+            setTimeout(() => {
+                phoneImage.src = imageSrc;
+                phoneImage.style.opacity = '1';
+            }, 300);
         }
 
-
-        // Dark mode toggle
         const toggleBtn = document.getElementById('dark-mode-toggle');
         const darkModeIcon = toggleBtn.querySelector('i');
 
         toggleBtn.addEventListener('click', () => {
             const isDark = document.body.classList.toggle('dark');
-
-            // Uložit preferenci
             localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-
-            // Změnit ikonu
             darkModeIcon.className = isDark ? 'fas fa-sun text-xl' : 'fas fa-moon text-xl';
-
-            // Změnit obrázky
             updateHeroImage(isDark);
             updatePhoneImage(isDark);
         });
 
-        // Načíst preferenci tmavého režimu při načtení stránky
         const savedDarkMode = localStorage.getItem('darkMode');
         if (savedDarkMode === 'enabled') {
             document.body.classList.add('dark');
@@ -798,36 +1719,32 @@
             updatePhoneImage(true);
         }
 
-        // Category navigation
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const category = this.getAttribute('data-category');
 
-                // Remove active class from all buttons
                 document.querySelectorAll('.category-btn').forEach(b => {
                     b.classList.remove('active', 'bg-primary', 'text-white');
                     b.classList.add('bg-gray-200', 'text-gray-700');
                 });
 
-                // Add active class to clicked button
                 this.classList.add('active', 'bg-primary', 'text-white');
                 this.classList.remove('bg-gray-200', 'text-gray-700');
 
-                // Hide all category contents
                 document.querySelectorAll('.category-content').forEach(content => {
                     content.classList.add('hidden');
                 });
 
-                // Show selected category content
                 document.getElementById(`category-${category}`).classList.remove('hidden');
             });
         });
 
-        // Service details data
-        const serviceDetails = {
-            'vstupni-vysetreni': {
+        let servicesData = [
+            {
+                id: 'vstupni-vysetreni',
                 title: 'Klinické vyšetření',
                 basePrice: 350,
+                category: 'vysetreni',
                 description: 'Kompletní vyšetření vašeho mazlíčka včetně anamnézy, fyzikálního vyšetření a základní diagnostiky.',
                 includes: [
                     'Anamnéza a rozhovor s majitelem',
@@ -843,9 +1760,11 @@
                 ],
                 note: 'Cena zahrnuje základní vyšetření. Další vyšetření a léky se účtují zvlášť.'
             },
-            'ockovani-zakladni': {
+            {
+                id: 'ockovani-zakladni',
                 title: 'Základní očkování',
                 basePrice: 620,
+                category: 'preventivni',
                 description: 'Pravidelné očkování pro prevenci infekčních onemocnění.',
                 includes: [
                     'Aplikace základní vakcíny',
@@ -854,11 +1773,13 @@
                 additionalCosts: [
                     'Speciální vakcíny: +300 Kč',
                     'Očkovací průkaz: +100 Kč'
-                ],
+                ]
             },
-            'kastrace-kocoura': {
+            {
+                id: 'kastrace-kocoura',
                 title: 'Kastrace kocoura',
                 basePrice: 1000,
+                category: 'chirurgie',
                 description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování kocoura.',
                 includes: [
                     'Předoperační vyšetření',
@@ -872,9 +1793,11 @@
                 ],
                 note: 'Cena zahrnuje základní výkon a anestezii.'
             },
-            'kastrace-kočky': {
+            {
+                id: 'kastrace-kočky',
                 title: 'Kastrace kočky',
                 basePrice: 1600,
+                category: 'chirurgie',
                 description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování kočky.',
                 includes: [
                     'Předoperační vyšetření',
@@ -888,9 +1811,11 @@
                 ],
                 note: 'Cena zahrnuje základní výkon a anestezii.'
             },
-            'kastrace-pes': {
+            {
+                id: 'kastrace-pes',
                 title: 'Kastrace psa',
                 basePrice: 1800,
+                category: 'chirurgie',
                 description: 'Chirurgický zákrok pro zabránění rozmnožování a zklidnění chování psa.',
                 includes: [
                     'Předoperační vyšetření',
@@ -904,9 +1829,11 @@
                 ],
                 note: 'Cena zahrnuje základní výkon a anestezii.'
             },
-            'kastrace-feny': {
+            {
+                id: 'kastrace-feny',
                 title: 'Kastrace feny',
                 basePrice: 3500,
+                category: 'chirurgie',
                 description: 'Komplexní chirurgický zákrok u fen, který předchází nechtěné březosti a snižuje riziko onemocnění.',
                 includes: [
                     'Předoperační vyšetření',
@@ -920,9 +1847,11 @@
                 ],
                 note: 'Cena se může lišit podle velikosti a zdravotního stavu feny.'
             },
-            'dentalni-hygiena': {
+            {
+                id: 'dentalni-hygiena',
                 title: 'Dentální hygiena',
                 basePrice: 1700,
+                category: 'specializovane',
                 description: 'Komplexní dentální péče včetně odstranění zubního kamene.',
                 includes: [
                     'Vyšetření dutiny ústní',
@@ -935,11 +1864,13 @@
                     'Extrakce zubů: +300 Kč/zub',
                     'Antibiotika: +200 Kč'
                 ],
-                note: 'Cena zahrnuje základní dentální hygienu. Anestezie a extrakce se účtují zvlášť.'
+                note: 'Cena zahrnuje základní dentální hygienu. Anestezie and extrakce se účtují zvlášť.'
             },
-            'ultrazvuk': {
+            {
+                id: 'ultrazvuk',
                 title: 'Ultrazvukové vyšetření',
                 basePrice: 500,
+                category: 'vysetreni',
                 description: 'Ultrazvukové vyšetření vnitřních orgánů.',
                 includes: [
                     'Vyšetření břicha',
@@ -954,35 +1885,37 @@
                 ],
                 note: 'Cena zahrnuje základní ultrazvukové vyšetření. Speciální vyšetření se účtují zvlášť.'
             },
-            'eutanazie': {
+            {
+                id: 'eutanazie',
                 title: 'Eutanazie',
                 basePrice: 800,
+                category: 'ostatni',
                 description: 'Eutanazie v ordinaci. Provozováno vždy v přítomnosti vlastníka mazlíčka.',
                 includes: [
-                    'Eutanazie v ordinaci',
+                    'Eutanazie v ordinaci'
                 ],
-                additionalCosts: [
-
-                ],
+                additionalCosts: [],
                 note: 'Cena zahrnuje základní službu.'
             },
-            'domaci-eutanazie': {
+            {
+                id: 'domaci-eutanazie',
                 title: 'Domácí eutanazie',
                 basePrice: 1600,
+                category: 'ostatni',
                 description: 'Rozloučení s vaším mazlíčkem v domácím prostředí, kde se cítí v bezpečí a pohodlí.',
                 includes: [
                     'Domácí návštěva veterináře',
                     'Předběžné vyšetření',
-                    'Eutanazie v domácím prostředí',
+                    'Eutanazie v domácím prostředí'
                 ],
-                additionalCosts: [
-
-                ],
+                additionalCosts: [],
                 note: 'Cena zahrnuje základní službu.'
             },
-            'ortopedie': {
+            {
+                id: 'ortopedie',
                 title: 'Ortopedické vyšetření',
                 basePrice: 800,
+                category: 'specializovane',
                 description: 'Specializované vyšetření pohybového aparátu, kloubů a kostí vašich mazlíčků.',
                 includes: [
                     'Ortopedické vyšetření',
@@ -998,10 +1931,157 @@
                 ],
                 note: 'Cena zahrnuje základní ortopedické vyšetření. RTG a další vyšetření se účtují zvlášť.'
             }
-        };
+        ];
 
+        const serviceDetails = {};
 
-        // Mobile menu toggle with ARIA update
+        function renderServicesTable() {
+            servicesData.forEach(s => {
+                serviceDetails[s.id] = s;
+            });
+
+            const categories = ['vysetreni', 'chirurgie', 'preventivni', 'specializovane', 'ostatni'];
+            categories.forEach(cat => {
+                const tbody = document.getElementById(`table-${cat}`);
+                if (!tbody) return;
+                tbody.innerHTML = '';
+
+                const catServices = servicesData.filter(s => s.category === cat);
+                catServices.forEach(service => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-50 cursor-pointer service-row transition-all duration-300 ease-in-out transform hover:scale-[1.02] hover:shadow-sm";
+                    tr.setAttribute('data-service', service.id);
+                    tr.innerHTML = `
+                        <td class="py-3 px-4">${service.title}</td>
+                        <td class="py-3 px-4 text-right">${service.basePrice} Kč</td>
+                    `;
+                    tr.addEventListener('click', function () {
+                        showServiceDetails(service);
+                    });
+                    tbody.appendChild(tr);
+                });
+            });
+        }
+
+        function applySettingsFromTSV(tsvText) {
+            const rows = tsvText.split('\n').map(row => row.split('\t'));
+            rows.forEach(row => {
+                if (row.length < 2) return;
+                const key = row[0].trim().toLowerCase();
+                const val = row[1].trim();
+
+                if (key.includes('dovolenou') || key.includes('oznámení') || key.includes('oznameni')) {
+                    ZOBRAZIT_OZNAMENI = (val.toUpperCase() === 'TRUE');
+                } else if (key.includes('text')) {
+                    TEXT_OZNAMENI = val;
+                } else if (key.includes('přispě') || key.includes('prispe')) {
+                    ZOBRAZIT_PRISPET = (val.toUpperCase() === 'TRUE');
+                } else if (key.includes('účet') || key.includes('account') || key.includes('ucet')) {
+                    DONATE_ACCOUNT_NUMBER = val;
+                } else if (key.includes('bank')) {
+                    DONATE_BANK_CODE = val;
+                }
+            });
+
+            updateVacationNoticeUI();
+            if (typeof updateDonateButtonUI === 'function') {
+                updateDonateButtonUI();
+            }
+        }
+
+        function applyServicesFromTSV(tsvText) {
+            const lines = tsvText.split('\n');
+            if (lines.length < 2) return;
+
+            const header = lines[0].split('\t').map(h => h.trim().toLowerCase());
+            
+            const idIdx = header.findIndex(h => h.includes('id'));
+            const titleIdx = header.findIndex(h => h.includes('název') || h.includes('nazev') || h.includes('jméno') || h.includes('jmeno') || h.includes('služba') || h.includes('sluzba'));
+            const priceIdx = header.findIndex(h => h.includes('cena'));
+            const catIdx = header.findIndex(h => h.includes('kategorie') || h.includes('category'));
+            const descIdx = header.findIndex(h => h.includes('popis') || h.includes('description'));
+            const incIdx = header.findIndex(h => h.includes('zahrnuje') || h.includes('includes'));
+            const addIdx = header.findIndex(h => h.includes('příplatky') || h.includes('priplatky') || h.includes('připlatky'));
+            const noteIdx = header.findIndex(h => h.includes('poznámka') || h.includes('poznamka') || h.includes('note'));
+
+            if (idIdx === -1 || titleIdx === -1 || priceIdx === -1 || catIdx === -1) {
+                console.error("Chybná struktura hlavičky ceníku v Google tabulce. Používá se lokální záloha.");
+                renderServicesTable();
+                return;
+            }
+
+            const parsedServices = [];
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                const cols = line.split('\t');
+                if (cols.length < 4) continue;
+
+                // Cleanup ID: replace spaces with dashes, convert to lowercase and remove accents
+                // This is extremely safe in case user types 'domaci eutanazie' with a space!
+                let id = cols[idIdx].trim().toLowerCase()
+                    .replace(/\s+/g, '-') // spaces to dashes
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove accents
+                
+                const title = cols[titleIdx].trim();
+                const basePrice = parseInt(cols[priceIdx].trim().replace(/\s/g, '').replace('Kč', '')) || 0;
+                const category = cols[catIdx].trim().toLowerCase()
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove accents
+                
+                const description = descIdx !== -1 && cols[descIdx] ? cols[descIdx].trim() : '';
+                
+                const includes = incIdx !== -1 && cols[incIdx] ? cols[incIdx].split(';').map(x => x.trim()).filter(Boolean) : [];
+                const additionalCosts = addIdx !== -1 && cols[addIdx] ? cols[addIdx].split(';').map(x => x.trim()).filter(Boolean) : [];
+                const note = noteIdx !== -1 && cols[noteIdx] ? cols[noteIdx].trim() : '';
+
+                parsedServices.push({
+                    id, title, basePrice, category, description, includes, additionalCosts, note
+                });
+            }
+
+            if (parsedServices.length > 0) {
+                servicesData = parsedServices;
+            }
+            renderServicesTable();
+        }
+
+        async function loadGoogleSheetsData() {
+            if (!GOOGLE_SHEET_ID) {
+                console.log("Google Sheets ID není zadáno, načítají se lokální záložní data.");
+                updateVacationNoticeUI();
+                renderServicesTable();
+                return;
+            }
+
+            try {
+                const settingsUrl = `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/pub?gid=${GID_NASTAVENI}&output=tsv`;
+                const settingsResponse = await fetch(settingsUrl);
+                if (settingsResponse.ok) {
+                    const settingsText = await settingsResponse.text();
+                    applySettingsFromTSV(settingsText);
+                } else {
+                    console.warn("Nepodařilo se načíst nastavení z tabulky. Používá se záloha.");
+                    updateVacationNoticeUI();
+                }
+
+                const servicesUrl = `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/pub?gid=${GID_CENIK}&output=tsv`;
+                const servicesResponse = await fetch(servicesUrl);
+                if (servicesResponse.ok) {
+                    const servicesText = await servicesResponse.text();
+                    applyServicesFromTSV(servicesText);
+                } else {
+                    console.warn("Nepodařilo se načíst ceník z tabulky. Používá se záloha.");
+                    renderServicesTable();
+                }
+            } catch (err) {
+                console.error("Selhalo spojení s Google Sheets. Používají se záložní data:", err);
+                updateVacationNoticeUI();
+                renderServicesTable();
+            }
+        }
+
+        loadGoogleSheetsData();
+
         const menuBtn = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', function () {
@@ -1010,7 +2090,6 @@
             this.setAttribute('aria-expanded', (!expanded).toString());
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1019,7 +2098,6 @@
                     behavior: 'smooth'
                 });
 
-                // Close mobile menu if open
                 if (!mobileMenu.classList.contains('hidden')) {
                     mobileMenu.classList.add('hidden');
                     menuBtn.setAttribute('aria-expanded', 'false');
@@ -1027,7 +2105,6 @@
             });
         });
 
-        // Service row click handlers
         document.querySelectorAll('.service-row').forEach(row => {
             row.addEventListener('click', function () {
                 const serviceId = this.getAttribute('data-service');
@@ -1039,7 +2116,6 @@
             });
         });
 
-        // Close details button
         document.getElementById('close-details').addEventListener('click', function () {
             hideServiceDetails();
         });
@@ -1071,7 +2147,7 @@
                 `;
             }
 
-            if (service.additionalCosts) {
+            if (service.additionalCosts && service.additionalCosts.length > 0) {
                 content += `
                     <div class="mb-4">
                         <h4 class="font-semibold text-primary mb-2">Další možné náklady:</h4>
@@ -1083,25 +2159,434 @@
             }
 
             if (service.note) {
-                content += `
-                    <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
-                        <p class="text-blue-800 text-sm"><i class="fas fa-info-circle mr-2" aria-hidden="true"></i>${service.note}</p>
-                    </div>
-                `;
+                content += `<p class="text-sm text-gray-500 italic mt-4">${service.note}</p>`;
             }
 
             contentElement.innerHTML = content;
             detailsSection.classList.remove('hidden');
-
-            // Scroll to details
-            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.body.style.overflow = 'hidden';
         }
 
         function hideServiceDetails() {
             document.getElementById('service-details').classList.add('hidden');
+            document.body.style.overflow = '';
         }
+        const donateBtn = document.getElementById('donate-btn');
+        const hideDonateBtn = document.getElementById('hide-donate-btn');
+        const donateModal = document.getElementById('donate-modal');
+        const closeModal = document.getElementById('close-modal');
+        const cancelDonate = document.getElementById('cancel-donate');
+        const donateForm = document.getElementById('donate-form');
+        const amountButtons = document.querySelectorAll('.amount-btn');
+        const customAmountInput = document.getElementById('custom-amount');
+        const qrSection = document.getElementById('qr-section');
+        const qrcodeDiv = document.getElementById('qrcode');
+        const amountDisplay = document.getElementById('amount-display');
+        let selectedAmount = 200;
+
+        const openDonateModal = () => {
+            donateModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            generateQRCode(selectedAmount);
+            expandDonateBtn();
+        };
+
+        const minimizeDonateBtn = () => {
+            if (donateFloatingContainer) {
+                donateFloatingContainer.classList.add('minimized');
+            }
+            if (donateRestoreTab) {
+                donateRestoreTab.classList.remove('hidden-tab');
+            }
+            localStorage.setItem('donate_minimized', 'true');
+        };
+
+        const expandDonateBtn = () => {
+            if (donateFloatingContainer) {
+                donateFloatingContainer.classList.remove('minimized');
+            }
+            if (donateRestoreTab) {
+                donateRestoreTab.classList.add('hidden-tab');
+            }
+            localStorage.setItem('donate_minimized', 'false');
+        };
+
+        function updateDonateButtonUI() {
+            if (ZOBRAZIT_PRISPET) {
+                if (donateFloatingContainer) {
+                    donateFloatingContainer.classList.remove('hidden');
+                }
+                if (donateRestoreTab) {
+                    donateRestoreTab.classList.remove('hidden');
+                }
+                if (localStorage.getItem('donate_minimized') === 'true') {
+                    minimizeDonateBtn();
+                } else {
+                    expandDonateBtn();
+                }
+            } else {
+                if (donateFloatingContainer) {
+                    donateFloatingContainer.classList.add('hidden');
+                }
+                if (donateRestoreTab) {
+                    donateRestoreTab.classList.add('hidden');
+                }
+            }
+        }
+
+        updateDonateButtonUI();
+
+        if (hideDonateBtn) {
+            hideDonateBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                minimizeDonateBtn();
+            });
+        }
+
+        if (donateRestoreTab) {
+            donateRestoreTab.addEventListener('click', (e) => {
+                e.stopPropagation();
+                expandDonateBtn();
+            });
+        }
+     
+        if (donateBtn) {
+            donateBtn.addEventListener('click', openDonateModal);
+        }
+
+        function closeDonateModal() {
+            donateModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            qrSection.classList.add('hidden');
+            qrcodeDiv.innerHTML = '';
+            selectedAmount = 200;
+            donateForm.reset();
+            amountButtons.forEach(btn => {
+                const amt = parseInt(btn.getAttribute('data-amount'));
+                if (amt === 200) {
+                    btn.classList.remove('bg-gray-100', 'text-gray-700', 'bg-gray-700', 'text-gray-200');
+                    btn.classList.add('bg-accent', 'text-white');
+                } else {
+                    btn.classList.remove('bg-accent', 'text-white');
+                    if (document.body.classList.contains('dark')) {
+                        btn.classList.remove('bg-gray-100', 'text-gray-700');
+                        btn.classList.add('bg-gray-700', 'text-gray-200');
+                    } else {
+                        btn.classList.remove('bg-gray-700', 'text-gray-200');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    }
+                }
+            });
+            const confirmBtn = qrSection.querySelector('.confirm-payment-btn');
+            if (confirmBtn) {
+                confirmBtn.remove();
+            }
+        }
+
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessBtn = document.getElementById('close-success-btn');
+
+        function startConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const colors = ['#77bf3c', '#1cb3a4', '#063b4a', '#a3e635', '#2dd4bf', '#f59e0b', '#ec4899'];
+            const particles = [];
+            
+            for (let i = 0; i < 150; i++) {
+                const type = Math.random() < 0.35 ? 'paw' : 'rect';
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * canvas.height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * 10 - 5,
+                    tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                    tiltAngle: 0,
+                    type: type,
+                    size: Math.random() * 16 + 12
+                });
+            }
+            
+            let animationFrameId;
+            let startTime = Date.now();
+            
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                let remaining = false;
+                particles.forEach((p, index) => {
+                    p.tiltAngle += p.tiltAngleIncremental;
+                    p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                    p.x += Math.sin(p.tiltAngle);
+                    p.tilt = Math.sin(p.tiltAngle - index / 3) * 15;
+                    
+                    if (p.y < canvas.height) {
+                        remaining = true;
+                    }
+                    
+                    if (p.type === 'paw') {
+                        ctx.save();
+                        ctx.font = `${p.size}px Arial, sans-serif`;
+                        ctx.fillStyle = p.color;
+                        ctx.translate(p.x + p.tilt, p.y);
+                        ctx.rotate(p.tiltAngle);
+                        ctx.fillText('🐾', -p.size / 2, p.size / 2);
+                        ctx.restore();
+                    } else {
+                        ctx.beginPath();
+                        ctx.lineWidth = p.r;
+                        ctx.strokeStyle = p.color;
+                        ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                        ctx.stroke();
+                    }
+                });
+                
+                if (remaining && Date.now() - startTime < 4000) {
+                    animationFrameId = requestAnimationFrame(draw);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }
+            
+            draw();
+        }
+
+        function showSuccessModal() {
+            if (!successModal) return;
+            successModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const content = successModal.querySelector('.modal-content');
+                if (content) {
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }
+            }, 10);
+            
+            startConfetti();
+        }
+
+        function closeSuccessModal() {
+            if (!successModal) return;
+            const content = successModal.querySelector('.modal-content');
+            if (content) {
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+            }
+            
+            setTimeout(() => {
+                successModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        if (closeSuccessBtn) {
+            closeSuccessBtn.addEventListener('click', closeSuccessModal);
+        }
+        if (successModal) {
+            successModal.addEventListener('click', (e) => {
+                if (e.target === successModal) {
+                    closeSuccessModal();
+                }
+            });
+        }
+    
+        closeModal.addEventListener('click', closeDonateModal);
+        cancelDonate.addEventListener('click', closeDonateModal);
+    
+        donateModal.addEventListener('click', (e) => {
+            if (e.target === donateModal) {
+                closeDonateModal();
+            }
+        });
+
+        amountButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedAmount = parseInt(btn.getAttribute('data-amount'));
+                customAmountInput.value = '';
+                
+                amountButtons.forEach(b => {
+                    b.classList.remove('bg-accent', 'text-white');
+                    if (document.body.classList.contains('dark')) {
+                        b.classList.remove('bg-gray-100', 'text-gray-700');
+                        b.classList.add('bg-gray-700', 'text-gray-200');
+                    } else {
+                        b.classList.remove('bg-gray-700', 'text-gray-200');
+                        b.classList.add('bg-gray-100', 'text-gray-700');
+                    }
+                });
+                
+                btn.classList.remove('bg-gray-100', 'text-gray-700', 'bg-gray-700', 'text-gray-200');
+                btn.classList.add('bg-accent', 'text-white');
+                
+                generateQRCode(selectedAmount);
+            });
+        });
+    
+        const MIN_AMOUNT = 10;
+        const MAX_AMOUNT = 10000;
+        
+        customAmountInput.addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            if (value >= MIN_AMOUNT && value <= MAX_AMOUNT) {
+                selectedAmount = value;
+                generateQRCode(selectedAmount);
+                
+                amountButtons.forEach(btn => {
+                    btn.classList.remove('bg-accent', 'text-white');
+                    if (document.body.classList.contains('dark')) {
+                        btn.classList.remove('bg-gray-100', 'text-gray-700');
+                        btn.classList.add('bg-gray-700', 'text-gray-200');
+                    } else {
+                        btn.classList.remove('bg-gray-700', 'text-gray-200');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    }
+                });
+            }
+        });
+
+        customAmountInput.addEventListener('blur', (e) => {
+            const value = parseInt(e.target.value);
+            if (e.target.value === '') {
+                selectedAmount = 200;
+                generateQRCode(selectedAmount);
+                amountButtons.forEach(btn => {
+                    const amt = parseInt(btn.getAttribute('data-amount'));
+                    if (amt === 200) {
+                        btn.classList.remove('bg-gray-100', 'text-gray-700', 'bg-gray-700', 'text-gray-200');
+                        btn.classList.add('bg-accent', 'text-white');
+                    }
+                });
+                return;
+            }
+            if (isNaN(value) || value < MIN_AMOUNT) {
+                e.target.value = MIN_AMOUNT;
+                selectedAmount = MIN_AMOUNT;
+                generateQRCode(selectedAmount);
+                alert(`Minimální částka je ${MIN_AMOUNT} Kč`);
+            } else if (value > MAX_AMOUNT) {
+                e.target.value = MAX_AMOUNT;
+                selectedAmount = MAX_AMOUNT;
+                generateQRCode(selectedAmount);
+                alert(`Maximální částka je ${MAX_AMOUNT.toLocaleString('cs-CZ')} Kč`);
+            }
+        });
+        
+        const generateQRCode = (amount) => {
+            const accountNumber = DONATE_ACCOUNT_NUMBER;
+            const bankCode = DONATE_BANK_CODE;
+            const message = 'Donace pro Veterinární ordinaci Orea';
+            
+            const convertToIBAN = (accountNum, bankCd) => {
+                const paddedAccount = accountNum.padStart(16, '0');
+                const bban = bankCd + paddedAccount;
+                const rearranged = bban + 'CZ00';
+                let numeric = '';
+                for (let i = 0; i < rearranged.length; i++) {
+                    const char = rearranged[i];
+                    if (char >= '0' && char <= '9') {
+                        numeric += char;
+                    } else {
+                        numeric += (char.charCodeAt(0) - 55).toString();
+                    }
+                }
+                let remainder = '';
+                for (let i = 0; i < numeric.length; i += 7) {
+                    const chunk = remainder + numeric.substring(i, i + 7);
+                    remainder = (parseInt(chunk) % 97).toString();
+                }
+                const checkDigits = (98 - parseInt(remainder)).toString().padStart(2, '0');
+                return 'CZ' + checkDigits + bban;
+            };
+            
+            const iban = convertToIBAN(accountNumber, bankCode);
+            const paymentString = `SPD*1.0*ACC:${iban}*AM:${amount.toFixed(2)}*CC:CZK*MSG:${message}`;
+            
+            qrcodeDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin text-2xl text-accent"></i><p class="mt-2 text-sm text-gray-600">Generování QR kódu...</p></div>';
+    
+            const encodedPaymentString = encodeURIComponent(paymentString);
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodedPaymentString}&bgcolor=ffffff&color=063b4a&margin=2`;
+            
+            const img = document.createElement('img');
+            img.src = qrApiUrl;
+            img.alt = 'QR kód pro platbu';
+            img.className = 'mx-auto';
+            
+            img.onload = () => {
+                if (amount !== selectedAmount) {
+                    return;
+                }
+                qrcodeDiv.innerHTML = '';
+                qrcodeDiv.appendChild(img);
+                
+                qrSection.classList.remove('hidden');
+                amountDisplay.textContent = `Částka: ${amount} Kč`;
+                
+                const donation = {
+                    id: Date.now(),
+                    amount: amount,
+                    date: new Date().toLocaleDateString('cs-CZ'),
+                    paid: false
+                };
+                
+                const pendingDonations = JSON.parse(localStorage.getItem('pendingDonations') || '[]');
+                pendingDonations.push(donation);
+                localStorage.setItem('pendingDonations', JSON.stringify(pendingDonations));
+                
+                const existingBtn = qrSection.querySelector('.confirm-payment-btn');
+                if (existingBtn) {
+                    existingBtn.remove();
+                }
+                
+                const confirmBtn = document.createElement('button');
+                confirmBtn.type = 'button';
+                confirmBtn.className = 'confirm-payment-btn mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-all';
+                confirmBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Potvrdit platbu';
+                confirmBtn.onclick = () => {
+                    const updatedPending = JSON.parse(localStorage.getItem('pendingDonations') || '[]').filter(d => d.id !== donation.id);
+                    localStorage.setItem('pendingDonations', JSON.stringify(updatedPending));
+                    
+                    closeDonateModal();
+                    showSuccessModal();
+                };
+                qrSection.querySelector('.bg-gray-50').appendChild(confirmBtn);
+            };
+            
+            img.onerror = () => {
+                qrcodeDiv.innerHTML = '<div class="text-center py-4 text-red-500"><i class="fas fa-exclamation-triangle text-2xl"></i><p class="mt-2 text-sm">Chyba při generování QR kódu.</p></div>';
+            };
+        };
+ 
+        const scrollToHoursBtn = document.getElementById('scroll-to-hours-btn');
+        const openingHoursCard = document.getElementById('opening-hours-card');
+ 
+        if (scrollToHoursBtn && openingHoursCard) {
+            scrollToHoursBtn.addEventListener('click', () => {
+                openingHoursCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                openingHoursCard.classList.remove('flash-active');
+                void openingHoursCard.offsetWidth;
+                openingHoursCard.classList.add('flash-active');
+                
+                setTimeout(() => {
+                    openingHoursCard.classList.remove('flash-active');
+                }, 1500);
+            });
+        }
+ 
+        donateForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+
+
     </script>
 </body>
-
 </html>
 
