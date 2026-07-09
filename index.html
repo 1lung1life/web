@@ -1600,7 +1600,7 @@
 
     <script>
   
-        const GOOGLE_SHEET_ID = '2PACX-1vQkTuERiOyEuzDdqjaMqMSPUd6wqZxxyJsbtoUJPld1fCD9VvxRm-1xwefXzyI7Q_hV--8q1pWO59HS'; 
+        const GOOGLE_SHEET_ID = '1mfF9e5fZl3qcrtKI9uPNZ8NQC3fGYDDKI8Guq-mEj_k'; 
         const GID_CENIK = '0';           
         const GID_NASTAVENI = '1136850674';     
 
@@ -1970,10 +1970,10 @@
                 const key = row[0].trim().toLowerCase();
                 const val = row[1].trim();
 
-                if (key.includes('dovolenou') || key.includes('oznámení') || key.includes('oznameni')) {
-                    ZOBRAZIT_OZNAMENI = (val.toUpperCase() === 'TRUE');
-                } else if (key.includes('text')) {
+                if (key.includes('text')) {
                     TEXT_OZNAMENI = val;
+                } else if (key.includes('dovolenou') || key.includes('oznámení') || key.includes('oznameni')) {
+                    ZOBRAZIT_OZNAMENI = (val.toUpperCase() === 'TRUE');
                 } else if (key.includes('přispě') || key.includes('prispe')) {
                     ZOBRAZIT_PRISPET = (val.toUpperCase() === 'TRUE');
                 } else if (key.includes('účet') || key.includes('account') || key.includes('ucet')) {
@@ -2054,7 +2054,7 @@
             }
 
             try {
-                const settingsUrl = `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/pub?gid=${GID_NASTAVENI}&output=tsv`;
+                const settingsUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=tsv&gid=${GID_NASTAVENI}`;
                 const settingsResponse = await fetch(settingsUrl);
                 if (settingsResponse.ok) {
                     const settingsText = await settingsResponse.text();
@@ -2064,7 +2064,7 @@
                     updateVacationNoticeUI();
                 }
 
-                const servicesUrl = `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/pub?gid=${GID_CENIK}&output=tsv`;
+                const servicesUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=tsv&gid=${GID_CENIK}`;
                 const servicesResponse = await fetch(servicesUrl);
                 if (servicesResponse.ok) {
                     const servicesText = await servicesResponse.text();
